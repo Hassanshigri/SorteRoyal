@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorteroyal Social Gaming Platform</title>
+    <meta
+      name="keywords"
+      content="online games, social games, slot games, live games, card games, poker, blackjack, roulette, social gaming platform"
+    />
+    <meta
+      name="description"
+      content="Join Sorteroyal for a majestic social gaming experience! Play free casino-inspired games with virtual coins, connect with friends, and enjoy thrilling rewards."
+    />
+    <link rel="canonical" href="https://sorteroyal.com/" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/images/favicon.ico"
+      sizes="16x16"
+    />
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
+      <div class="cookie-content">
+        <h5>Royal Cookie Consent</h5>
+        <p>
+          We use cookies to enhance your majestic experience. By continuing, you agree to our
+          <a href="/cookies-policy/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
+        </p>
+        <div class="cookie-buttons">
+          <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
+          <button class="cmn--btn" onclick="declineCookies()">Decline</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Authentication Modal -->
+    <div class="custom--modal" id="authModal" style="display: none">
+      <div class="modal-content animate__animated animate__zoomIn">
+        <div class="modal-header">
+          <h5>Enter the Royal Court</h5>
+          <button type="button" class="btn-close" onclick="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <div class="auth-tabs">
+            <button class="tab-link active" onclick="openTab('login')">Login</button>
+            <button class="tab-link" onclick="openTab('register')">Register</button>
+          </div>
+          <div id="login" class="tab-content active">
+            <input type="email" id="loginEmail" placeholder="Royal Email" required />
+            <input type="password" id="loginPassword" placeholder="Secret Password" required />
+            <button class="cmn--btn active" onclick="login()">Join the Throne</button>
+            <div class="form-link">
+              <a href="javascript:void(0)" onclick="openTab('register')">New to the Kingdom? Claim Your Crown</a>
+            </div>
+          </div>
+          <div id="register" class="tab-content">
+            <input type="text" id="registerUsername" placeholder="Royal Username" required />
+            <input type="email" id="registerEmail" placeholder="Royal Email" required />
+            <input type="password" id="registerPassword" placeholder="Secret Password" required />
+            <button class="cmn--btn active" onclick="register()">Claim Your Crown</button>
+            <div class="form-link">
+              <a href="javascript:void(0)" onclick="openTab('login')">Already a Noble? Enter Here</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Modal -->
+    <div class="game-modal" id="gameModal" style="display: none">
+      <div class="game-modal-content animate__animated animate__zoomIn">
+        <div class="game-modal-header">
+          <h5 id="gameModalTitle">Royal Game</h5>
+          <button type="button" class="btn-close" onclick="closeGameModal()"></button>
+        </div>
+        <iframe id="gameFrame" onload="iframeLoaded();" allowfullscreen class="hub88_game_frame" src=""></iframe>
+      </div>
+    </div>
+
+    <!-- Alert Modal -->
+    <div class="alert-modal" id="alertModal" style="display: none">
+      <div class="alert-modal-content animate__animated animate__zoomIn">
+        <div class="alert-modal-header">
+          <h5>Notice</h5>
+          <button type="button" class="btn-close" onclick="closeAlertModal()"></button>
+        </div>
+        <p id="alertMessage"></p>
+        <div class="alert-modal-buttons">
+          <button class="cmn--btn active" onclick="closeAlertModal()">OK</button>
+        </div>
+      </div>
+    </div>
+
+
+<header class="header">
+  <div class="container">
+    <div class="header-bottom">
+      <div class="header-bottom-area d-flex align-items-center justify-content-between">
+
+        <!-- Logo -->
+        <div class="logo">
+          <a href="/"><img src="/assets/images/logo-royal.png" alt="Sorteroyal Logo" class="logo-img" /></a>
+        </div>
+
+        <!-- Mobile Toggle Button -->
+        <button class="navbar-toggler d-lg-none header-trigger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+        </button>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg">
+          <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav menu">
+              <li class="nav-item"><a class="nav-link" href="/">Palace Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="/about/">Royal Story</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="/games/">
+                  Royal Games
+                  <span class="badge badge--sm badge--base text-dark">NEW</span>
+                </a>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="/contact/">Summon Us</a></li>
+
+              <!-- Auth Section (Works in Desktop + Mobile) -->
+              <li class="nav-item mt-3 mt-lg-0 ms-lg-3">
+                <div class="auth-section d-flex flex-column flex-lg-row align-items-center">
+                  <div id="auth-container">
+                    <a href="javascript:void(0)" id="auth-btn" class="cmn--btn active btn--md" onclick="showAuthModal()">Enter/Register</a>
+                  </div>
+                  <div id="user-account" class="ms-lg-3 mt-2 mt-lg-0 d-flex align-items-center">
+                    <div id="user-circle" class="user-circle d-none">
+                      <span id="user-name"></span>
+                      <div class="user-dropdown">
+                        <div id="user-details"></div>
+                        <a href="javascript:void(0)" id="logout-btn" onclick="logout()">Leave the Court</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+      </div>
+    </div>
+  </div>
+</header>
+
+     <style> 
+     .alert-modal{
+        display: flex; justify-content: center; align-items: center;
+     }
+      .custom--modal{
+        display: none; 
+    display: flex; justify-content: center; align-items: center; 
+      }
+      .game-modal{
+        display: flex; justify-content: center; align-items: center;
+      }
+         .alert-modal{
+        display: flex; justify-content: center; align-items: center;
+     }
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0e0e1a;
+      color: #f0f0f0;
+      line-height: 1.7;
+    }
+
+   
+.about-header {
+  position: relative;
+  background: linear-gradient(rgba(37, 37, 37, 0.7), rgba(0, 0, 0, 0.7)),
+              url('/assets/images/about-royal.png') no-repeat center center/cover;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.about-header::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* dark overlay for readability */
+}
+
+.about-header h1,
+.about-header p {
+  position: relative;
+  z-index: 1; /* ensures text appears above overlay */
+}
+
+
+    /* Content */
+    .about-content {
+      max-width: 1100px;
+      margin: auto;
+      padding: 3rem 1rem;
+    }
+    .about-content h2 {
+      color: #ffe425;
+      font-size: 2rem;
+      margin-bottom: 0.7rem;
+      position: relative;
+    }
+    .about-content h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: #ff9500;
+      margin-top: 0.4rem;
+      border-radius: 2px;
+    }
+    .about-content p, 
+    .about-content li {
+      font-size: 1rem;
+      color: #ddd;
+    }
+    .about-content ul {
+      margin-top: 0.5rem;
+      padding-left: 1.5rem;
+    }
+    .about-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* CTA Section */
+    .cta {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    .cta h2 {
+      font-size: 2rem;
+      color: #ff9500;
+    }
+    .cta p {
+      margin: 1rem 0;
+      color: #bbb;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      background: linear-gradient(135deg, #ffe425, #ff9500);
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 20px rgba(255, 0, 124, 0.4);
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: 3rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .about-header h1 {
+        font-size: 2rem;
+      }
+      .about-content h2 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+
+
+  <main class="about-content">
+  <div class="about-header mb-5">
+    <h1>About Sorteroyal</h1>
+    <p>Your ultimate destination for social gaming fun</p>
+  </div>
+    <section>
+      <h2>Our Story</h2>
+      <p>Sorteroyal was founded with a single mission to create an online space where gaming meets community. We wanted to capture the thrill of casino-style games and make them accessible to everyone in a safe, fun, and interactive environment. Since our launch, thousands of players worldwide have joined our platform, enjoying free slots, poker, roulette, blackjack, and other engaging social games.</p>
+    </section>
+
+    <section>
+      <h2>Our Mission</h2>
+      <p>We are here to provide a <strong>premium social gaming experience</strong> that blends entertainment, friendly competition, and a vibrant online community. Unlike real-money casinos, Sorteroyal focuses purely on fun, offering virtual coins and rewards that keep the excitement going without any financial risk.</p>
+    </section>
+
+    <section>
+      <h2>What Makes Us Different</h2>
+      <ul>
+        <li>🎮 <strong>Variety of Games:</strong> From slots to table games, we offer something for every player.</li>
+        <li>🌍 <strong>Global Community:</strong> Meet and compete with players from all over the world.</li>
+        <li>🏆 <strong>Daily Rewards:</strong> Log in daily to collect free coins, bonuses, and treasures.</li>
+        <li>🔒 <strong>Safe & Secure:</strong> Your data and privacy are our top priority.</li>
+      </ul>
+    </section>
+<!-- FAQ Section -->
+    <section class="faq-section padding-top padding-bottom overflow-hidden">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-7 col-xl-6 col-md-8">
+            <div class="section-header text-center animate__animated animate__fadeInDown">
+              <h2 class="section-header__title">Royal Inquiries</h2>
+              <p>Find answers to common questions about Sorteroyal’s majestic gaming experience.</p>
+            </div>
+          </div>
+        </div>
+        <div class="faq-wrapper">
+          <!-- 1 -->
+          <div class="faq-item animate__animated animate__fadeInUp" role="button" aria-expanded="false" aria-controls="faq-1">
+            <div class="faq-item__title">
+              <h5 class="title">1. Is Sorteroyal a real-money casino?</h5>
+              <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+            </div>
+            <div class="faq-item__content" id="faq-1">
+              <p>No, Sorteroyal is a social gaming platform for fun only, using virtual coins with no cash value.</p>
+            </div>
+          </div>
+          <!-- 2 -->
+          <div class="faq-item animate__animated animate__fadeInUp animate__delay-1s" role="button" aria-expanded="false" aria-controls="faq-2">
+            <div class="faq-item__title">
+              <h5 class="title">2. Do I need to register to play?</h5>
+              <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+            </div>
+            <div class="faq-item__content" id="faq-2">
+              <p>Yes, registration unlocks our full game library and exclusive features.</p>
+            </div>
+          </div>
+          <!-- 3 -->
+          <div class="faq-item animate__animated animate__fadeInUp animate__delay-2s" role="button" aria-expanded="false" aria-controls="faq-3">
+            <div class="faq-item__title">
+              <h5 class="title">3. What games are available?</h5>
+              <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+            </div>
+            <div class="faq-item__content" id="faq-3">
+              <p>Enjoy slots, poker, roulette, and more from top providers like Pragmatic Play and Evolution Gaming.</p>
+            </div>
+          </div>
+          <!-- 4 -->
+          <div class="faq-item animate__animated animate__fadeInUp animate__delay-3s" role="button" aria-expanded="false" aria-controls="faq-4">
+            <div class="faq-item__title">
+              <h5 class="title">4. Can I play without internet?</h5>
+              <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+            </div>
+            <div class="faq-item__content" id="faq-4">
+              <p>No, an internet connection is required to access our live community and games.</p>
+            </div>
+          </div>
+          <!-- 5 -->
+          <div class="faq-item animate__animated animate__fadeInUp" role="button" aria-expanded="false" aria-controls="faq-5">
+            <div class="faq-item__title">
+              <h5 class="title">5. How do I earn more coins?</h5>
+              <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+            </div>
+            <div class="faq-item__content" id="faq-5">
+              <p>Earn coins through daily logins, leaderboard rankings, or special events.</p>
+            </div>
+          </div>
+          <!-- 6 -->
+          <div class="faq-item animate__animated animate__fadeInUp animate__delay-1s" role="button" aria-expanded="false" aria-controls="faq-6">
+            <div class="faq-item__title">
+              <h5 class="title">6. Is Sorteroyal mobile-friendly?</h5>
+              <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+            </div>
+            <div class="faq-item__content" id="faq-6">
+              <p>Yes, our platform is fully responsive for seamless play on phones, tablets, and desktops.</p>
+            </div>
+          </div>
+          <!-- 7 -->
+          <div class="faq-item animate__animated animate__fadeInUp animate__delay-2s" role="button" aria-expanded="false" aria-controls="faq-7">
+            <div class="faq-item__title">
+              <h5 class="title">7. How do I join?</h5>
+              <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+            </div>
+            <div class="faq-item__content" id="faq-7">
+              <p>Click “Register” on the homepage, fill out the form, and receive 10,000 free coins to start!</p>
+            </div>
+          </div>
+          <!-- 8 -->
+          <div class="faq-item animate__animated animate__fadeInUp animate__delay-3s" role="button" aria-expanded="false" aria-controls="faq-8">
+            <div class="faq-item__title">
+              <h5 class="title">8. Can I invite friends?</h5>
+              <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+            </div>
+            <div class="faq-item__content" id="faq-8">
+              <p>Yes! Invite friends and earn bonus coins for each new noble who joins your court.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2>Our Values</h2>
+      <p>At Sorteroyal, we believe gaming should be:</p>
+      <ul>
+        <li><strong>Fun First:</strong> Games are meant to entertain and bring joy.</li>
+        <li><strong>Inclusive:</strong> Everyone is welcome, regardless of skill level.</li>
+        <li><strong>Community-Driven:</strong> We grow together through friendship and competition.</li>
+        <li><strong>Safe:</strong> A worry-free place for players to connect and play.</li>
+      </ul>
+    </section>
+
+    <section class="cta">
+      <h2>Join the Sorteroyal Community Today</h2>
+      <p>Be part of a world where gaming meets friendship. Sign up now and start playing your favorite games for free!</p>
+    
+    </section>
+
+  </main>
+
+<!-- Footer -->
+    <footer class="bg-dark-secondary py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <h5 class="text-white mb-3">Sorteroyal</h5>
+            <p class="text-white">For those 18 and above. Sorteroyal offers social gaming with no real stakes. We promote responsible play with self-restriction options and support resources.</p>
+            <p class="text-white small">Certified partners: GamCare, BeGambleAware, 18+</p>
+          </div>
+         
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h6 class="text-white mb-3">Legal</h6>
+            <ul class="list-unstyled">
+              <li><a href="../privacy/" class="text-white text-decoration-none">Privacy Policy</a></li>
+              <li><a href="../terms/" class="text-white text-decoration-none">Terms of Service</a></li>
+  <li><a href="../cookies/" class="text-white text-decoration-none">Cookies Policy</a></li>
+               <li><a href="../responsiblegaming/" class="text-white text-decoration-none">Responsible Gaming</a></li>
+            
+            </ul>
+          </div>
+          <div class="col-lg-3 mb-4">
+            <h6 class="text-white mb-3">Contact Info</h6>
+            <p class="text-white mb-2">
+              <i class="fas fa-phone me-2"></i>+1 555-987-6543
+            </p>
+            <p class="text-white mb-2">
+              <i class="fas fa-envelope me-2"></i>support@sorteroyal.com
+            </p>
+            <div class="d-flex gap-3 mt-3">
+              <a href="javascript:void(0)" class="text-white fs-5"><i class="fab fa-facebook"></i></a>
+              <a href="javascript:void(0)" class="text-white fs-5"><i class="fab fa-twitter"></i></a>
+              <a href="javascript:void(0)" class="text-white fs-5"><i class="fab fa-instagram"></i></a>
+              <a href="javascript:void(0)" class="text-white fs-5"><i class="fab fa-discord"></i></a>
+            </div>
+          </div>
+        </div>
+        <hr class="border-purple">
+        <div class="row">
+          <div class="col-12 text-center">
+            <p class="text-white mb-0">&copy; 2025 Sorteroyal. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+</body>
+ <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="/script.js"></script>
+</html>
