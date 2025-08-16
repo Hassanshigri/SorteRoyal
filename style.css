@@ -21,6 +21,7 @@ section {
   /* padding: 50px 0px; */
 }
   
+
 .banner-section,
 .about-section,
 .game-section,
@@ -1762,45 +1763,100 @@ section {
   color: #FFEB3B;
   text-decoration: underline;
 }
+/* Overlay (dark background) */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
 
+/* Cookie popup fixed at bottom */
 .cookie-popup {
   position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 450px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   background: linear-gradient(180deg, var(--royal-blue), var(--dark-blue));
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  border-radius: 15px 15px 0 0; /* rounded top only */
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.4);
   z-index: 10000;
-  padding: 25px;
+  padding: 20px;
+  animation-duration: 0.5s;
+}
+
+/* Content */
+.cookie-content {
+  max-width: 600px;
+  margin: 0 auto;
+  /* text-align: center; */
 }
 
 .cookie-content h5 {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: var(--gold);
-  margin: 0 0 15px;
   font-weight: 700;
 }
 
 .cookie-content p {
   font-size: 0.95rem;
   color: var(--white);
-  margin: 0 0 20px;
+  margin: 0 0 15px;
   line-height: 1.5;
 }
+/* Row: text + buttons inline */
+.cookie-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
 
+/* Text */
+.cookie-row p {
+  flex: 1;
+  font-size: 0.95rem;
+  color: var(--white);
+  margin: 0;
+  line-height: 1.4;
+  text-align: left;
+}
+
+/* Buttons */
 .cookie-buttons {
   display: flex;
-  gap: 15px;
-  justify-content: center;
+  gap: 10px;
 }
 
 .cookie-buttons .cmn--btn {
-  padding: 10px 25px;
-  font-size: 0.95rem;
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  white-space: nowrap; /* prevent wrapping */
 }
+
+/* ✅ Mobile: stack text above buttons */
+@media (max-width: 576px) {
+  .cookie-row {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cookie-buttons {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cookie-buttons .cmn--btn {
+    width: 100%;
+  }
+}
+
+
 
 .alert-modal-content p {
   font-size: 1rem;
@@ -1878,11 +1934,7 @@ section {
     max-width: 95%;
     padding: 20px;
   }
-  .cookie-popup {
-    max-width: 90%;
-    padding: 20px;
-    bottom: 20px;
-  }
+ 
   .modal-header h5, .alert-modal-header h5, .game-modal-header h5 {
     font-size: 1.4rem;
   }

@@ -75,19 +75,24 @@
   </head>
   <body>
     <div class="overlay"></div>
-    <div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
-      <div class="cookie-content">
-        <h5>Royal Cookie Consent</h5>
-        <p>
-          We use cookies to enhance your majestic experience. By continuing, you agree to our
-          <a href="/cookies-policy/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
-        </p>
-        <div class="cookie-buttons">
-          <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
-          <button class="cmn--btn" onclick="declineCookies()">Decline</button>
-        </div>
+<div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
+  <div class="cookie-content">
+    <h5>Royal Cookie Consent</h5>
+
+    <div class="cookie-row">
+      <p>
+        We use cookies to enhance your majestic experience. By continuing, you agree to our
+        <a href="/cookies/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
+      </p>
+
+      <div class="cookie-buttons">
+        <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
+        <button class="cmn--btn" onclick="declineCookies()">Decline</button>
       </div>
     </div>
+  </div>
+</div>
+
 
     <!-- Authentication Modal -->
     <div class="custom--modal" id="authModal" style="display: none">
