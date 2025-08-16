@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorteroyal Social Gaming Platform</title>
+    <meta
+      name="keywords"
+      content="online games, social games, slot games, live games, card games, poker, blackjack, roulette, social gaming platform"
+    />
+    <meta
+      name="description"
+      content="Join Sorteroyal for a majestic social gaming experience! Play free casino-inspired games with virtual coins, connect with friends, and enjoy thrilling rewards."
+    />
+    <link rel="canonical" href="https://sorteroyal.com/" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/images/favicon.ico"
+      sizes="16x16"
+    />
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
+      <div class="cookie-content">
+        <h5>Royal Cookie Consent</h5>
+        <p>
+          We use cookies to enhance your majestic experience. By continuing, you agree to our
+          <a href="/cookies-policy/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
+        </p>
+        <div class="cookie-buttons">
+          <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
+          <button class="cmn--btn" onclick="declineCookies()">Decline</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Authentication Modal -->
+    <div class="custom--modal" id="authModal" style="display: none">
+      <div class="modal-content animate__animated animate__zoomIn">
+        <div class="modal-header">
+          <h5>Enter the Royal Court</h5>
+          <button type="button" class="btn-close" onclick="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <div class="auth-tabs">
+            <button class="tab-link active" onclick="openTab('login')">Login</button>
+            <button class="tab-link" onclick="openTab('register')">Register</button>
+          </div>
+          <div id="login" class="tab-content active">
+            <input type="email" id="loginEmail" placeholder="Royal Email" required />
+            <input type="password" id="loginPassword" placeholder="Secret Password" required />
+            <button class="cmn--btn active" onclick="login()">Join the Throne</button>
+            <div class="form-link">
+              <a href="javascript:void(0)" onclick="openTab('register')">New to the Kingdom? Claim Your Crown</a>
+            </div>
+          </div>
+          <div id="register" class="tab-content">
+            <input type="text" id="registerUsername" placeholder="Royal Username" required />
+            <input type="email" id="registerEmail" placeholder="Royal Email" required />
+            <input type="password" id="registerPassword" placeholder="Secret Password" required />
+            <button class="cmn--btn active" onclick="register()">Claim Your Crown</button>
+            <div class="form-link">
+              <a href="javascript:void(0)" onclick="openTab('login')">Already a Noble? Enter Here</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Modal -->
+    <div class="game-modal" id="gameModal" style="display: none">
+      <div class="game-modal-content animate__animated animate__zoomIn">
+        <div class="game-modal-header">
+          <h5 id="gameModalTitle">Royal Game</h5>
+          <button type="button" class="btn-close" onclick="closeGameModal()"></button>
+        </div>
+        <iframe id="gameFrame" onload="iframeLoaded();" allowfullscreen class="hub88_game_frame" src=""></iframe>
+      </div>
+    </div>
+
+    <!-- Alert Modal -->
+    <div class="alert-modal" id="alertModal" style="display: none">
+      <div class="alert-modal-content animate__animated animate__zoomIn">
+        <div class="alert-modal-header">
+          <h5>Notice</h5>
+          <button type="button" class="btn-close" onclick="closeAlertModal()"></button>
+        </div>
+        <p id="alertMessage"></p>
+        <div class="alert-modal-buttons">
+          <button class="cmn--btn active" onclick="closeAlertModal()">OK</button>
+        </div>
+      </div>
+    </div>
+
+
+<header class="header">
+  <div class="container">
+    <div class="header-bottom">
+      <div class="header-bottom-area d-flex align-items-center justify-content-between">
+
+        <!-- Logo -->
+        <div class="logo">
+          <a href="/"><img src="/assets/images/logo-royal.png" alt="Sorteroyal Logo" class="logo-img" /></a>
+        </div>
+
+        <!-- Mobile Toggle Button -->
+        <button class="navbar-toggler d-lg-none header-trigger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+        </button>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg">
+          <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav menu">
+              <li class="nav-item"><a class="nav-link" href="/">Palace Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="/about/">Royal Story</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="/games/">
+                  Royal Games
+                  <span class="badge badge--sm badge--base text-dark">NEW</span>
+                </a>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="/contact/">Summon Us</a></li>
+
+              <!-- Auth Section (Works in Desktop + Mobile) -->
+              <li class="nav-item mt-3 mt-lg-0 ms-lg-3">
+                <div class="auth-section d-flex flex-column flex-lg-row align-items-center">
+                  <div id="auth-container">
+                    <a href="javascript:void(0)" id="auth-btn" class="cmn--btn active btn--md" onclick="showAuthModal()">Enter/Register</a>
+                  </div>
+                  <div id="user-account" class="ms-lg-3 mt-2 mt-lg-0 d-flex align-items-center">
+                    <div id="user-circle" class="user-circle d-none">
+                      <span id="user-name"></span>
+                      <div class="user-dropdown">
+                        <div id="user-details"></div>
+                        <a href="javascript:void(0)" id="logout-btn" onclick="logout()">Leave the Court</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+      </div>
+    </div>
+  </div>
+</header>
+
+    <style>  .custom--modal{
+        display: none; 
+    display: flex; justify-content: center; align-items: center; 
+      }
+      .game-modal{
+        display: flex; justify-content: center; align-items: center;
+      }
+         .alert-modal{
+        display: flex; justify-content: center; align-items: center;
+     }
+      /* Inline styles to match Sorteroyal look and feel */
+      .terms-header {
+        position: relative;
+        background: linear-gradient(rgba(15,12,41,0.85), rgba(26,26,78,0.85)),
+                    url('/assets/images/banner/thumb-royal.png') no-repeat center center/cover;
+        color: #fff;
+        text-align: center;
+        padding: 5rem 1rem;
+      }
+      .terms-header h1 { color: #f8d56b; font-size: 2.75rem; margin-bottom: .5rem; }
+      .terms-header p { color: #ddd; max-width: 900px; margin: 0 auto; }
+
+      .terms-container { max-width: 1000px; margin: 3rem auto; padding: 0 1rem; }
+      .terms-card { background: rgba(26,26,78,0.7); border: 1px solid rgba(248,213,107,0.12); padding: 2rem; border-radius: 12px; color: #e9e9ef; box-shadow: 0 8px 30px rgba(0,0,0,0.35); }
+      .terms-card h5 { color: #ffe425; margin: 1rem 0; }
+      .terms-card h3 { color: #f8d56b; margin-top: 1.25rem; }
+      .terms-card p, .terms-card li { color: #d6d6df; line-height: 1.6; }
+      .terms-card ul { padding-left: 1.15rem; }
+      .terms-note { font-size: .95rem; color: #bfc0c9; margin-top: 1rem; }
+
+      /* Anchor link styles */
+      .terms-nav { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1rem; }
+      .terms-nav a { background: rgba(248,213,107,0.08); color:#f8d56b; padding:.45rem .7rem; border-radius:8px; text-decoration:none; font-weight:600; }
+      .terms-nav a:hover { background: rgba(248,213,107,0.16); }
+
+      @media (max-width:768px){ .terms-header h1{font-size:2rem} }
+    </style>
+  </head>
+  <body>
+
+    <header class="terms-header">
+      <h1>Terms &amp; Conditions</h1>
+      <p>Welcome to Sorteroyal. Please read these Terms &amp; Conditions carefully — they govern your access to and use of our website, services and games. By using Sorteroyal you agree to be bound by these terms.</p>
+    </header>
+
+    <main class="terms-container">
+      <div class="terms-card">
+
+        <nav class="terms-nav" aria-label="Terms quick links">
+          <a href="#acceptance">Acceptance</a>
+          <a href="#eligibility">Eligibility</a>
+          <a href="#accounts">Accounts</a>
+          <a href="#use">Use of Service</a>
+          <a href="#responsible">Responsible Play</a>
+          <a href="#intellectual">Intellectual Property</a>
+          <a href="#liability">Liability</a>
+        </nav>
+
+        <section id="acceptance">
+          <h5>1. Acceptance of Terms</h5>
+          <p>By accessing or using Sorteroyal (the “Service”), you confirm that you have read, understood and agree to these Terms &amp; Conditions, our Privacy Policy and any other policies posted on the site. If you do not agree, do not use our Service.</p>
+        </section>
+
+        <section id="eligibility">
+          <h5>2. Eligibility</h5>
+          <p>You must be at least <strong>18 years old</strong> to use Sorteroyal. By creating an account or using the Service you represent and warrant that you meet the legal age requirement and that you are competent to enter into these Terms.</p>
+        </section>
+
+        <section id="accounts">
+          <h5>3. Accounts &amp; Security</h5>
+          <p>When you register, you agree to provide accurate, current and complete information. You are responsible for maintaining the confidentiality of your account credentials and for all activity under your account. Notify us immediately if you suspect unauthorized use.</p>
+          <ul>
+            <li>Do not share your password or sell/trade accounts.</li>
+            <li>We reserve the right to suspend or terminate accounts that breach these Terms.</li>
+          </ul>
+        </section>
+
+        <section id="use">
+          <h5>4. Use of the Service</h5>
+          <p>Sorteroyal offers social, virtual coin-based games and related features. All in-game coins, points and rewards are virtual and have no real-world monetary value.</p>
+          <ul>
+            <li>You must use the Service in a lawful and respectful manner.</li>
+            <li>Cheating, collusion or exploiting bugs is strictly prohibited.</li>
+            <li>Any content you upload must respect third party rights and local laws.</li>
+          </ul>
+        </section>
+
+        <section id="responsible">
+          <h5>5. Responsible Play</h5>
+          <p>Sorteroyal promotes safe and responsible gaming. Our services are intended for entertainment only. If you feel your play is becoming problematic, please use the available self-exclusion and cooling-off tools or contact our support team.</p>
+          <p class="terms-note">Certified partners and resources mentioned on our site (e.g., GamCare, BeGambleAware) are independent organizations — we recommend using their guidance if you need help.</p>
+        </section>
+
+        <section id="intellectual">
+          <h5>6. Intellectual Property</h5>
+          <p>All content, trademarks, logos and game designs on Sorteroyal are owned or licensed by us. You may not copy, reproduce or create derivative works without our written permission.</p>
+        </section>
+
+        <section id="conduct">
+          <h5>7. User Conduct</h5>
+          <p>Users must not post abusive, obscene, defamatory, hateful or illegal content. Harassment, threats or discriminatory behavior will result in account action and possible reporting to authorities where required by law.</p>
+        </section>
+
+        <section id="payments">
+          <h5>8. Payments &amp; Virtual Currency</h5>
+          <p>Where applicable, purchases of virtual currency are final and non-refundable except as required by law or our refund policy. Virtual currency has no cash value and cannot be exchanged for real money.</p>
+        </section>
+
+        <section id="privacy">
+          <h5>9. Privacy</h5>
+          <p>Your use of Sorteroyal is also governed by our <a href="/privacy/" style="color:#f8d56b; text-decoration:underline;">Privacy Policy</a>, which explains how we collect, use and store personal information.</p>
+        </section>
+
+        <section id="cookies">
+          <h5>10. Cookies</h5>
+          <p>We use cookies to improve functionality and personalize your experience. For details see our <a href="/cookies/" style="color:#f8d56b; text-decoration:underline;">Cookies Policy</a>.</p>
+        </section>
+
+        <section id="liability">
+          <h5>11. Limitation of Liability</h5>
+          <p>To the maximum extent permitted by law, Sorteroyal and its affiliates are not liable for any indirect, incidental, special or consequential damages arising from your use of the Service. Our total liability is limited to the amount you have paid to us in the last 12 months, or such other limit as required by law.</p>
+        </section>
+
+        <section id="termination">
+          <h5>12. Termination</h5>
+          <p>We may suspend or terminate your access for breaches of these Terms or for operational or legal reasons. Some provisions (e.g., intellectual property, liability, indemnity) will survive termination.</p>
+        </section>
+
+        <section id="changes">
+          <h5>13. Changes to Terms</h5>
+          <p>We may update these Terms from time to time. We will notify users of material changes via the site or email. Continued use after updates constitutes acceptance of the revised Terms.</p>
+        </section>
+
+        <section id="governing">
+          <h5>14. Governing Law</h5>
+          <p>These Terms are governed by the laws applicable to the jurisdiction in which Sorteroyal operates. If any provision is found invalid, the remaining provisions will remain in force.</p>
+        </section>
+
+        <section id="contact-us">
+          <h5>15. Contact Us</h5>
+          <p>If you have questions about these Terms, please contact our support team at <a href="mailto:support@sorteroyal.com" style="color:#f8d56b; text-decoration:underline;">support@sorteroyal.com</a> or call +92 300 1234567.</p>
+        </section>
+
+        <p class="terms-note">Last updated: <strong>August 15, 2025</strong></p>
+
+      </div>
+      <h2 class="mt-5">Disclaimer</h2>
+<p>
+All information, services, and features provided on Sorteroyal are made available on an "as-is" and "as-available" basis. While we make every reasonable effort to ensure accuracy and reliability, we do not warrant that our services will always be error-free, uninterrupted, or free from harmful components. Sorteroyal does not take responsibility for any reliance placed on the information provided within the platform, including third-party content or linked resources. Users accept that they access and use the site at their own risk, and Sorteroyal is not liable for any technical issues, data loss, or other potential damages resulting from use of the platform.
+</p>
+
+<h4 class="my-3">Indemnity</h4>
+<p>
+By using our services, you agree to indemnify, defend, and hold harmless Sorteroyal, its team members, partners, and affiliates from and against any claims, liabilities, damages, losses, or expenses arising out of or related to your misuse of the platform, violation of these Terms, or infringement of any third-party rights. This indemnity obligation will survive the termination or expiration of these Terms and Conditions and will continue to apply as long as you use or access our services in any way.
+</p>
+
+<h4 class="my-3">Frequently Asked Questions (FAQs)</h4>
+<p><strong class="my-2">Q: Do I need to pay to use Sorteroyal?</strong><br>
+A: No. Sorteroyal operates on free access with virtual coins for entertainment purposes only. No real money is involved, and you cannot convert coins into cash.
+</p>
+
+<p><strong class="my-2">Q: Is my personal information safe?</strong><br>
+A: Yes. We value your privacy and only collect necessary details as per our Privacy Policy. We never sell or misuse your personal data.
+</p>
+
+<p><strong class="my-2">Q: Can I delete my account if I no longer wish to use Sorteroyal?</strong><br>
+A: Absolutely. You may contact us anytime to request account removal, after which your profile and associated data will be securely deleted.
+</p>
+
+<p><strong class="my-2">Q: Does Sorteroyal offer real gambling services?</strong><br>
+A: No. Our games are strictly for fun and entertainment using virtual coins. They are not designed for real gambling and should not be considered a source of income.
+</p>
+
+    </main>
+
+    <!-- Optional: include site footer markup if desired -->
+
+ 
+<!-- Footer -->
+    <footer class="bg-dark-secondary py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <h5 class="text-white mb-3">Sorteroyal</h5>
+            <p class="text-white">For those 18 and above. Sorteroyal offers social gaming with no real stakes. We promote responsible play with self-restriction options and support resources.</p>
+            <p class="text-white small">Certified partners: GamCare, BeGambleAware, 18+</p>
+          </div>
+         
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h6 class="text-white mb-3">Legal</h6>
+            <ul class="list-unstyled">
+              <li><a href="../privacy/" class="text-white text-decoration-none">Privacy Policy</a></li>
+              <li><a href="../terms/" class="text-white text-decoration-none">Terms of Service</a></li>
+  <li><a href="../cookies/" class="text-white text-decoration-none">Cookies Policy</a></li>
+           
+               <li><a href="../responsiblegaming/" class="text-white text-decoration-none">Responsible Gaming</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 mb-4">
+            <h6 class="text-white mb-3">Contact Info</h6>
+            <p class="text-white mb-2">
+              <i class="fas fa-phone me-2"></i>+1 555-987-6543
+            </p>
+            <p class="text-white mb-2">
+              <i class="fas fa-envelope me-2"></i>support@sorteroyal.com
+            </p>
+            <div class="d-flex gap-3 mt-3">
+              <a href="javascript:void(0)" class="text-white fs-5"><i class="fab fa-facebook"></i></a>
+              <a href="javascript:void(0)" class="text-white fs-5"><i class="fab fa-twitter"></i></a>
+              <a href="javascript:void(0)" class="text-white fs-5"><i class="fab fa-instagram"></i></a>
+              <a href="javascript:void(0)" class="text-white fs-5"><i class="fab fa-discord"></i></a>
+            </div>
+          </div>
+        </div>
+        <hr class="border-purple">
+        <div class="row">
+          <div class="col-12 text-center">
+            <p class="text-white mb-0">&copy; 2025 Sorteroyal. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+</body>
+</html>
