@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorteroyal Social Gaming Platform - Cookie Policy</title>
+    <meta
+      name="keywords"
+      content="online games, social games, slot games, live games, card games, poker, blackjack, roulette, social gaming platform, cookies, privacy"
+    />
+    <meta
+      name="description"
+      content="Learn about Sorteroyal's Cookie Policy, how we use cookies to enhance your social gaming experience, and your options for managing them."
+    />
+    <link rel="canonical" href="https://sorteroyal.com/cookies/" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/images/favicon.ico"
+      sizes="16x16"
+    />
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/style.css" />
+    <style>
+      .custom--modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .game-modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .alert-modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      /* Cookie Policy Styles to match Terms and Privacy */
+      .cookie-header {
+        position: relative;
+        background: linear-gradient(rgba(15,12,41,0.85), rgba(26,26,78,0.85)),
+                    url('/assets/images/banner/thumb-royal.png') no-repeat center center/cover;
+        color: #fff;
+        text-align: center;
+        padding: 5rem 1rem;
+      }
+      .cookie-header h1 { color: #f8d56b; font-size: 2.75rem; margin-bottom: .5rem; }
+      .cookie-header p { color: #ddd; max-width: 900px; margin: 0 auto; }
+
+      .cookie-container { max-width: 1000px; margin: 3rem auto; padding: 0 1rem; }
+      .cookie-card { background: rgba(26,26,78,0.7); border: 1px solid rgba(248,213,107,0.12); padding: 2rem; border-radius: 12px; color: #e9e9ef; box-shadow: 0 8px 30px rgba(0,0,0,0.35); }
+      .cookie-card h5 { color: #ffe425; margin: 1rem 0; }
+      .cookie-card h3 { color: #f8d56b; margin-top: 1.25rem; }
+      .cookie-card p, .cookie-card li { color: #d6d6df; line-height: 1.6; }
+      .cookie-card ul { padding-left: 1.15rem; }
+      .cookie-note { font-size: .95rem; color: #bfc0c9; margin-top: 1rem; }
+
+      /* Anchor link styles */
+      .cookie-nav { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+      .cookie-nav a { background: rgba(248,213,107,0.08); color: #f8d56b; padding: .45rem .7rem; border-radius: 8px; text-decoration: none; font-weight: 600; }
+      .cookie-nav a:hover { background: rgba(248,213,107,0.16); }
+
+      @media (max-width: 768px) { .cookie-header h1 { font-size: 2rem; } }
+    </style>
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
+      <div class="cookie-content">
+        <h5>Royal Cookie Consent</h5>
+        <p>
+          We use cookies to enhance your majestic experience. By continuing, you agree to our
+          <a href="/cookies-policy/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
+        </p>
+        <div class="cookie-buttons">
+          <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
+          <button class="cmn--btn" onclick="declineCookies()">Decline</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Authentication Modal -->
+    <div class="custom--modal" id="authModal" style="display: none">
+      <div class="modal-content animate__animated animate__zoomIn">
+        <div class="modal-header">
+          <h5>Enter the Royal Court</h5>
+          <button type="button" class="btn-close" onclick="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <div class="auth-tabs">
+            <button class="tab-link active" onclick="openTab('login')">Login</button>
+            <button class="tab-link" onclick="openTab('register')">Register</button>
+          </div>
+          <div id="login" class="tab-content active">
+            <input type="email" id="loginEmail" placeholder="Royal Email" required />
+            <input type="password" id="loginPassword" placeholder="Secret Password" required />
+            <button class="cmn--btn active" onclick="login()">Join the Throne</button>
+            <div class="form-link">
+              <a href="javascript:void(0)" onclick="openTab('register')">New to the Kingdom? Claim Your Crown</a>
+            </div>
+          </div>
+          <div id="register" class="tab-content">
+            <input type="text" id="registerUsername" placeholder="Royal Username" required />
+            <input type="email" id="registerEmail" placeholder="Royal Email" required />
+            <input type="password" id="registerPassword" placeholder="Secret Password" required />
+            <button class="cmn--btn active" onclick="register()">Claim Your Crown</button>
+            <div class="form-link">
+              <a href="javascript:void(0)" onclick="openTab('login')">Already a Noble? Enter Here</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Modal -->
+    <div class="game-modal" id="gameModal" style="display: none">
+      <div class="game-modal-content animate__animated animate__zoomIn">
+        <div class="game-modal-header">
+          <h5 id="gameModalTitle">Royal Game</h5>
+          <button type="button" class="btn-close" onclick="closeGameModal()"></button>
+        </div>
+        <iframe id="gameFrame" onload="iframeLoaded();" allowfullscreen class="hub88_game_frame" src=""></iframe>
+      </div>
+    </div>
+
+    <!-- Alert Modal -->
+    <div class="alert-modal" id="alertModal" style="display: none">
+      <div class="alert-modal-content animate__animated animate__zoomIn">
+        <div class="alert-modal-header">
+          <h5>Notice</h5>
+          <button type="button" class="btn-close" onclick="closeAlertModal()"></button>
+        </div>
+        <p id="alertMessage"></p>
+        <div class="alert-modal-buttons">
+          <button class="cmn--btn active" onclick="closeAlertModal()">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <header class="header">
+      <div class="container">
+        <div class="header-bottom">
+          <div class="header-bottom-area d-flex align-items-center justify-content-between">
+            <!-- Logo -->
+            <div class="logo">
+              <a href="/"><img src="/assets/images/logo-royal.png" alt="Sorteroyal Logo" class="logo-img" /></a>
+            </div>
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler d-lg-none header-trigger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+            </button>
+            <!-- Navigation -->
+            <nav class="navbar navbar-expand-lg">
+              <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav menu">
+                  <li class="nav-item"><a class="nav-link" href="/">Palace Home</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/about/">Royal Story</a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/games/">
+                      Royal Games
+                      <span class="badge badge--sm badge--base text-dark">NEW</span>
+                    </a>
+                  </li>
+                  <li class="nav-item"><a class="nav-link" href="/contact/">Summon Us</a></li>
+                  <!-- Auth Section (Works in Desktop + Mobile) -->
+                  <li class="nav-item mt-3 mt-lg-0 ms-lg-3">
+                    <div class="auth-section d-flex flex-column flex-lg-row align-items-center">
+                      <div id="auth-container">
+                        <a href="javascript:void(0)" id="auth-btn" class="cmn--btn active btn--md" onclick="showAuthModal()">Enter/Register</a>
+                      </div>
+                      <div id="user-account" class="ms-lg-3 mt-2 mt-lg-0 d-flex align-items-center">
+                        <div id="user-circle" class="user-circle d-none">
+                          <span id="user-name"></span>
+                          <div class="user-dropdown">
+                            <div id="user-details"></div>
+                            <a href="javascript:void(0)" id="logout-btn" onclick="logout()">Leave the Court</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <header class="cookie-header">
+      <h1>Cookie Policy</h1>
+      <p>Learn how Sorteroyal uses cookies to enhance your social gaming experience and how you can manage them.</p>
+    </header>
+
+    <main class="cookie-container">
+      <div class="cookie-card">
+        <nav class="cookie-nav" aria-label="Cookie Policy Navigation">
+          <a href="#cookies-overview">Cookies Overview</a>
+          <a href="#cookies-used">Types of Cookies Used</a>
+          <a href="#cookies-purpose">Purpose of Cookies</a>
+          <a href="#managing-cookies">Managing Cookies</a>
+          <a href="#third-party-cookies">Third-Party Cookies</a>
+          <a href="#updates">Updates to This Policy</a>
+          <a href="#contact">Contact Us</a>
+        </nav>
+
+        <section id="cookies-overview">
+          <h5>1. Cookies Overview</h5>
+          <p>At <strong>Sorteroyal</strong>, we use cookies and similar technologies to enhance your experience on our social gaming platform. This Cookie Policy explains what cookies are, how we use them, and your options for managing them. By using our website and services, you consent to the use of cookies as described below.</p>
+        </section>
+
+        <section id="cookies-used">
+          <h5>2. Types of Cookies Used</h5>
+          <p>We use the following types of cookies:</p>
+          <ul>
+            <li><strong>Essential Cookies:</strong> Necessary for the website to function, enabling core features like user authentication and game functionality.</li>
+            <li><strong>Performance Cookies:</strong> Collect anonymized data on how users interact with our platform to improve performance and user experience.</li>
+            <li><strong>Functional Cookies:</strong> Remember your preferences (e.g., language or game settings) to provide a personalized experience.</li>
+            <li><strong>Analytics Cookies:</strong> Help us understand user behavior, such as which games are most popular, to enhance our services.</li>
+          </ul>
+        </section>
+
+        <section id="cookies-purpose">
+          <h5>3. Purpose of Cookies</h5>
+          <p>We use cookies to:</p>
+          <ul>
+            <li>Ensure smooth operation of our social gaming platform and secure online play.</li>
+            <li>Personalize your gaming experience by remembering your preferences and settings.</li>
+            <li>Analyze platform usage to improve game performance and introduce new features.</li>
+            <li>Support responsible gaming by monitoring user interactions and ensuring a safe environment.</li>
+          </ul>
+          <p class="cookie-note">We do not use cookies to collect personal information for sale or advertising purposes.</p>
+        </section>
+
+        <section id="managing-cookies">
+          <h5>4. Managing Cookies</h5>
+          <p>You can control cookies through your browser settings. Most browsers allow you to disable non-essential cookies or delete existing cookies. However, disabling cookies may limit some features of our platform, such as personalized game settings or performance optimizations. For more information, visit your browser’s help section.</p>
+          <p>You can also manage cookie preferences via our cookie consent popup when you first visit our site, choosing to accept or decline non-essential cookies.</p>
+        </section>
+
+        <section id="third-party-cookies">
+          <h5>5. Third-Party Cookies</h5>
+          <p>We may use trusted third-party services (e.g., analytics or hosting providers) that set their own cookies. These providers follow strict privacy guidelines and only use data necessary for their services. We ensure these third parties comply with applicable data protection laws.</p>
+        </section>
+
+        <section id="updates">
+          <h5>6. Updates to This Policy</h5>
+          <p>We may update this Cookie Policy to reflect changes in technology, regulations, or our services. Significant changes will be posted on our website. Continued use of our services after changes indicates your acceptance of the updated policy.</p>
+        </section>
+
+        <section id="contact">
+          <h5>7. Contact Us</h5>
+          <p>If you have questions about this Cookie Policy, please contact our support team at <a href="mailto:support@sorteroyal.com" style="color:#f8d56b; text-decoration:underline;">support@sorteroyal.com</a> or call +92 300 1234567.</p>
+        </section>
+
+        <p class="cookie-note">Last updated: <strong>August 15, 2025</strong></p>
+      </div>
+    </main>
+
+    <footer class="bg-dark-secondary py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <h5 class="text-white mb-3">Sorteroyal</h5>
+            <p class="text-white">For those 18 and above. Sorteroyal offers social gaming with no real stakes. We promote responsible play with self-restriction options and support resources.</p>
+            <p class="text-white small">Certified partners: GamCare, BeGambleAware, 18+</p>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h5 class="text-white mb-3">Legal</h5>
+            <ul class="list-unstyled">
+              <li><a href="../privacy/" class="text-white text-decoration-none">Privacy Policy</a></li>
+              <li><a href="../terms/" class="text-white text-decoration-none">Terms of Service</a></li>
+              <li><a href="../cookies/" class="text-white text-decoration-none">Cookies Policy</a></li>
+              <li><a href="../responsiblegaming/" class="text-white text-decoration-none">Responsible Gaming</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 mb-4">
+            <h5 class="text-white mb-3">Contact Info</h5>
+            <p class="text-white mb-2">
+              <i class="fas fa-phone me-2"></i>+92 300 1234567
+            </p>
+            <p class="text-white mb-2">
+              <i class="fas fa-envelope me-2"></i>support@sorteroyal.com
+            </p>
+            <div class="d-flex gap-3 mt-3">
+              <a href="javascript:void(0)" class="text-white fs-5"><i class="fab fa-facebook"></i></a>
+              <a href="javascript:void(0)" class="text-white fs-5"><i class="fab fa-twitter"></i></a>
+              <a href="javascript:void(0)" class="text-white fs-5"><i class="fab fa-instagram"></i></a>
+              <a href="javascript:void(0)" class="text-white fs-5"><i class="fab fa-discord"></i></a>
+            </div>
+          </div>
+        </div>
+        <hr class="border-purple">
+        <div class="row">
+          <div class="col-12 text-center">
+            <p class="text-white mb-0">&copy; 2025 Sorteroyal. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="/script.js"></script>
+  </body>
+</html>
