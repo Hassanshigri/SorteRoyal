@@ -32,19 +32,24 @@
   </head>
   <body>
     <div class="overlay"></div>
-    <div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
-      <div class="cookie-content">
-        <h5>Royal Cookie Consent</h5>
-        <p>
-          We use cookies to enhance your majestic experience. By continuing, you agree to our
-          <a href="/cookies-policy/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
-        </p>
-        <div class="cookie-buttons">
-          <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
-          <button class="cmn--btn" onclick="declineCookies()">Decline</button>
-        </div>
+<div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
+  <div class="cookie-content">
+    <h5>Royal Cookie Consent</h5>
+
+    <div class="cookie-row">
+      <p>
+        We use cookies to enhance your majestic experience. By continuing, you agree to our
+        <a href="/cookies/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
+      </p>
+
+      <div class="cookie-buttons">
+        <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
+        <button class="cmn--btn" onclick="declineCookies()">Decline</button>
       </div>
     </div>
+  </div>
+</div>
+
 
     <!-- Authentication Modal -->
     <div class="custom--modal" id="authModal" style="display: none">
@@ -327,67 +332,6 @@ background-repeat: no-repeat;
             margin-bottom: 1.8rem;
             font-size: 0.95rem;
             line-height: 1.7;
-        }
-
-        /* Button Styles */
-        .button-wrapper {
-            display: inline-block;
-            margin: 0.5rem 0;
-            position: relative;
-            overflow: hidden;
-            border-radius: 6px;
-        }
-
-        .button-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--electric-pink));
-            z-index: -1;
-            border-radius: 8px;
-            opacity: 0.7;
-            transition: all 0.3s ease;
-        }
-
-        .cmn--btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 32px;
-            border-radius: 6px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            background: var(--space-gray);
-            color: var(--neon-blue);
-            border: 1px solid rgba(0, 242, 255, 0.3);
-        }
-
-        .cmn--btn:hover {
-            background: rgba(26, 26, 46, 0.7);
-            color: var(--cyber-green);
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .cmn--btn:active {
-            transform: translateY(0);
-        }
-
-        .cmn--btn.btn--lg {
-            padding: 16px 40px;
-            font-size: 1.1rem;
         }
 
         /* Featured Section */
