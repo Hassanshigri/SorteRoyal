@@ -29,661 +29,906 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <!-- Custom Styles -->
     <link rel="stylesheet" href="/style.css" />
+    <style>  .custom--modal{
+        display: none; 
+    display: flex; justify-content: center; align-items: center; 
+      }
+      .game-modal{
+        display: flex; justify-content: center; align-items: center;
+      }
+         .alert-modal{
+        display: flex; justify-content: center; align-items: center;
+     }
+      /* Age Verification Popup Styles */
+      .age-verification-popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+      }
+      
+      .age-verification-content {
+        background: linear-gradient(135deg, #1a1a4e 0%, #0f0c29 100%);
+        padding: 30px;
+        border-radius: 15px;
+        max-width: 600px;
+        text-align: center;
+        border: 2px solid var(--gold);
+        box-shadow: 0 0 30px rgba(248, 213, 107, 0.3);
+      }
+      
+      .age-verification-content h2 {
+        color: var(--gold);
+        margin-bottom: 20px;
+        font-size: 28px;
+      }
+      
+      .age-verification-content p {
+        margin-bottom: 25px;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      
+      .age-verification-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+      
+      .age-btn {
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        font-size: 16px;
+      }
+      
+      .age-confirm {
+        background: var(--gold);
+        color: #0f0c29;
+      }
+      
+      .age-confirm:hover {
+        background: #f5c842;
+        transform: translateY(-3px);
+      }
+      
+      .age-decline {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+      }
+      
+      .age-decline:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-3px);
+      }
+      
+      /* Hide main content initially */
+      .main-content {
+        display: none;
+      }
+      
+      /* Custom variables */
+      :root {
+        --gold: #f8d56b;
+      }
+    
+   
+    </style>
   </head>
   <body>
-    <div class="overlay"></div>
-    <div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
-      <div class="cookie-content">
-        <h5>Royal Cookie Consent</h5>
-        <p>
-          We use cookies to enhance your majestic experience. By continuing, you agree to our
-          <a href="/cookies-policy/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
-        </p>
-        <div class="cookie-buttons">
-          <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
-          <button class="cmn--btn" onclick="declineCookies()">Decline</button>
+    <!-- Age Verification Popup -->
+    <div class="age-verification-popup" id="ageVerificationPopup">
+      <div class="age-verification-content animate__animated animate__zoomIn">
+        <h2><i class="fas fa-exclamation-triangle"></i> Age Verification</h2>
+        <p>Welcome to Sorteroyal, a social gaming platform with casino-style games. Our content is intended for adults 18 years of age or older. By entering, you confirm you are at least 18 years old.</p>
+        <p>Our games use virtual currency with no real monetary value. No actual gambling or real money prizes are offered.</p>
+        <div class="age-verification-buttons">
+          <button class="age-btn age-confirm" onclick="confirmAge()">
+            <i class="fas fa-check-circle"></i> I'm 18 or Older
+          </button>
+          <button class="age-btn age-decline" onclick="declineAge()">
+            <i class="fas fa-times-circle"></i> I'm Under 18
+          </button>
         </div>
       </div>
     </div>
 
-    <!-- Authentication Modal -->
-    <div class="custom--modal" id="authModal" style="display: none">
-      <div class="modal-content animate__animated animate__zoomIn">
-        <div class="modal-header">
-          <h5>Enter the Royal Court</h5>
-          <button type="button" class="btn-close" onclick="closeModal()"></button>
-        </div>
-        <div class="modal-body">
-          <div class="auth-tabs">
-            <button class="tab-link active" onclick="openTab('login')">Login</button>
-            <button class="tab-link" onclick="openTab('register')">Register</button>
-          </div>
-          <div id="login" class="tab-content active">
-            <input type="email" id="loginEmail" placeholder="Royal Email" required />
-            <input type="password" id="loginPassword" placeholder="Secret Password" required />
-            <button class="cmn--btn active" onclick="login()">Join the Throne</button>
-            <div class="form-link">
-              <a href="javascript:void(0)" onclick="openTab('register')">New to the Kingdom? Claim Your Crown</a>
-            </div>
-          </div>
-          <div id="register" class="tab-content">
-            <input type="text" id="registerUsername" placeholder="Royal Username" required />
-            <input type="email" id="registerEmail" placeholder="Royal Email" required />
-            <input type="password" id="registerPassword" placeholder="Secret Password" required />
-            <button class="cmn--btn active" onclick="register()">Claim Your Crown</button>
-            <div class="form-link">
-              <a href="javascript:void(0)" onclick="openTab('login')">Already a Noble? Enter Here</a>
-            </div>
+    <!-- Main Content (hidden until age verification) -->
+    <div class="main-content" id="mainContent">
+    
+      <div class="overlay"></div>
+      <div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
+        <div class="cookie-content">
+          <h5>Royal Cookie Consent</h5>
+          <p>
+            We use cookies to enhance your majestic experience. By continuing, you agree to our
+            <a href="/cookies/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
+          </p>
+          <div class="cookie-buttons">
+            <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
+            <button class="cmn--btn" onclick="declineCookies()">Decline</button>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Game Modal -->
-    <div class="game-modal" id="gameModal" style="display: none">
-      <div class="game-modal-content animate__animated animate__zoomIn">
-        <div class="game-modal-header">
-          <h5 id="gameModalTitle">Royal Game</h5>
-          <button type="button" class="btn-close" onclick="closeGameModal()"></button>
-        </div>
-        <iframe id="gameFrame" onload="iframeLoaded();" allowfullscreen class="hub88_game_frame" src=""></iframe>
-      </div>
-    </div>
-
-    <!-- Alert Modal -->
-    <div class="alert-modal" id="alertModal" style="display: none">
-      <div class="alert-modal-content animate__animated animate__zoomIn">
-        <div class="alert-modal-header">
-          <h5>Notice</h5>
-          <button type="button" class="btn-close" onclick="closeAlertModal()"></button>
-        </div>
-        <p id="alertMessage"></p>
-        <div class="alert-modal-buttons">
-          <button class="cmn--btn active" onclick="closeAlertModal()">OK</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Header -->
-    <header class="header">
-      <div class="container">
-        <div class="header-bottom">
-          <div class="header-bottom-area d-flex align-items-center justify-content-between">
-            <div class="logo">
-              <a href="/"><img src="/assets/images/logo-royal.png" alt="Sorteroyal Logo" class="logo-img" /></a>
+      <!-- Authentication Modal -->
+      <div class="custom--modal" id="authModal" style="display: none; " >
+        <div class="modal-content animate__animated animate__zoomIn">
+          <div class="modal-header">
+            <h5>Enter the Royal Court</h5>
+            <button type="button" class="btn-close" onclick="closeModal()"></button>
+          </div>
+          <div class="modal-body">
+            <div class="auth-tabs">
+              <button class="tab-link active" onclick="openTab('login')">Login</button>
+              <button class="tab-link" onclick="openTab('register')">Register</button>
             </div>
-            <nav class="navbar navbar-expand-lg">
-              <button class="navbar-toggler header-trigger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
-              </button>
-              <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                <ul class="navbar-nav menu">
-                  <li class="nav-item"><a class="nav-link" href="/">Palace Home</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/about/">Royal Story</a></li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/games/">
-                      Royal Games
-                      <span class="badge badge--sm badge--base text-dark">NEW</span>
-                    </a>
-                  </li>
-                  <li class="nav-item"><a class="nav-link" href="/contact/">Summon Us</a></li>
-                </ul>
+            <div id="login" class="tab-content active">
+              <input type="email" id="loginEmail" placeholder="Royal Email" required />
+              <input type="password" id="loginPassword" placeholder="Secret Password" required />
+              <button class="cmn--btn active" onclick="login()">Join the Throne</button>
+              <div class="form-link">
+                <a href="javascript:void(0)" onclick="openTab('register')">New to the Kingdom? Claim Your Crown</a>
               </div>
-            </nav>
-            <div class="auth-section d-flex align-items-center">
-              <div id="auth-container">
-                <a href="javascript:void(0)" id="auth-btn" class="cmn--btn active btn--md ms-3" onclick="showAuthModal()">Enter/Register</a>
-              </div>
-              <div id="user-account" class="ms-3 d-flex align-items-center">
-                <div id="user-circle" class="user-circle d-none">
-                  <span id="user-name"></span>
-                  <div class="user-dropdown">
-                    <div id="user-details"></div>
-                    <a href="javascript:void(0)" id="logout-btn" onclick="logout()">Leave the Court</a>
-                  </div>
-                </div>
+            </div>
+            <div id="register" class="tab-content">
+              <input type="text" id="registerUsername" placeholder="Royal Username" required />
+              <input type="email" id="registerEmail" placeholder="Royal Email" required />
+              <input type="password" id="registerPassword" placeholder="Secret Password" required />
+              <button class="cmn--btn active" onclick="register()">Claim Your Crown</button>
+              <div class="form-link">
+                <a href="javascript:void(0)" onclick="openTab('login')">Already a Noble? Enter Here</a>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </header>
 
-    <!-- Banner Section -->
-    <section class="banner-section bg_img overflow-hidden royal-banner" style="background: url('/assets/images/banner/thumb-royal.png') no-repeat right center / contain;">
-      <div class="container">
-        <div class="banner-wrapper d-flex flex-wrap align-items-center justify-content-center">
-          <div class="banner-content col-lg-6 animate__animated animate__fadeInLeft">
-            <h1 class="banner-content__title">
-              Sorteroyal <span class="text--base text-white">Royal Social Gaming</span>
-            </h1>
-            <p class="banner-content__subtitle">
-              Step into a kingdom of thrilling casino-inspired games. Play for free with virtual coins, connect with nobles, and claim daily treasures.
-            </p>
-            <div class="button-wrapper">
-              <a href="/games/" class="cmn--btn btn--lg">Enter the Games</a>
-            </div>
+      <!-- Game Modal -->
+      <div class="game-modal" id="gameModal" style="display: none">
+        <div class="game-modal-content animate__animated animate__zoomIn">
+          <div class="game-modal-header">
+            <h5 id="gameModalTitle">Royal Game</h5>
+            <button type="button" class="btn-close" onclick="closeGameModal()"></button>
+          </div>
+          <iframe id="gameFrame" onload="iframeLoaded();" allowfullscreen class="hub88_game_frame" src=""></iframe>
+        </div>
+      </div>
+
+      <!-- Alert Modal -->
+      <div class="alert-modal" id="alertModal" style="display: none">
+        <div class="alert-modal-content animate__animated animate__zoomIn">
+          <div class="alert-modal-header">
+            <h5>Notice</h5>
+            <button type="button" class="btn-close" onclick="closeAlertModal()"></button>
+          </div>
+          <p id="alertMessage"></p>
+          <div class="alert-modal-buttons">
+            <button class="cmn--btn active" onclick="closeAlertModal()">OK</button>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- About Section -->
-    <section class="about-section padding-top padding-bottom overflow-hidden">
-      <div class="container">
-        <div class="row align-items-center justify-content-center">
-          <div class="col-lg-6 col-md-8 text-center text-lg-start">
-            <div class="about-content animate__animated animate__fadeInUp">
-              <div class="section-header">
-                <h2 class="section-header__title">Discover Sorteroyal</h2>
-                <p>
-                  Sorteroyal invites you to a majestic social gaming realm where casino-inspired fun meets a vibrant community. Play with virtual coins for pure entertainment.
-                </p>
-              </div>
-              <a href="/about/" class="cmn--btn active">Learn the Legend</a>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-8 text-center">
-            <div class="about-thumb section-thumb animate__animated animate__fadeInUp animate__delay-1s">
-              <img src="/assets/images/about-royal.png" alt="About Sorteroyal" class="img-fluid" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<!-- Header -->
 
-    <!-- Game Section -->
-    <section class="game-section padding-top padding-bottom bg_img" style="background: url(/assets/images/inner-banner/bg-royal.jpg)">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-6 col-xl-5">
-            <div class="section-header text-center animate__animated animate__fadeInDown">
-              <h2 class="section-header__title">Majestic Games Await</h2>
-              <p>
-                Explore our royal collection of casino-inspired games, powered by top providers. Play with virtual coins for endless fun.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="row gy-5 justify-content-center">
-          <div class="col-lg-4 col-xl-3 col-md-6 col-sm-8">
-            <div class="game-item animate__animated animate__fadeInUp">
-              <div class="game-inner">
-                <div class="game-item__thumb">
-                  <img src="/assets/images/game/crown-jewels.webp" alt="Crown Jewels Slot" />
-                </div>
-                <div class="game-item__content">
-                  <h4 class="title">Crown Jewels Slot</h4>
-                  <p class="invest-info">Royal Gaming</p>
-                  <a href="javascript:void(0)" class="cmn--btn active btn--md radius-0" onclick="playGame('https://demo.royalgaming.com/crown-jewels', 'Crown Jewels Slot')">Play Now</a>
-                </div>
-              </div>
-              <div class="ball"></div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-xl-3 col-md-6 col-sm-8">
-            <div class="game-item animate__animated animate__fadeInUp animate__delay-1s">
-              <div class="game-inner">
-                <div class="game-item__thumb">
-                  <img src="/assets/images/game/royal-poker.jpg" alt="Royal Poker" />
-                </div>
-                <div class="game-item__content">
-                  <h4 class="title">Royal Poker</h4>
-                  <p class="invest-info">Pragmatic Play</p>
-                  <a href="javascript:void(0)" class="cmn--btn active btn--md radius-0" onclick="playGame('https://demo.pragmaticplay.com/royal-poker', 'Royal Poker')">Play Now</a>
-                </div>
-              </div>
-              <div class="ball"></div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-xl-3 col-md-6 col-sm-8">
-            <div class="game-item animate__animated animate__fadeInUp animate__delay-2s">
-              <div class="game-inner">
-                <div class="game-item__thumb">
-                  <img src="/assets/images/game/king-roulette.jpg" alt="King’s Roulette" />
-                </div>
-                <div class="game-item__content">
-                  <h4 class="title">King’s Roulette</h4>
-                  <p class="invest-info">Evolution Gaming</p>
-                  <a href="javascript:void(0)" class="cmn--btn active btn--md radius-0" onclick="playGame('https://demo.evolutiongaming.com/kings-roulette', 'King’s Roulette')">Play Now</a>
-                </div>
-              </div>
-              <div class="ball"></div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-xl-3 col-md-6 col-sm-8">
-            <div class="game-item animate__animated animate__fadeInUp animate__delay-3s">
-              <div class="game-inner">
-                <div class="game-item__thumb">
-                  <img src="/assets/images/game/throne-blackjack.jpg" alt="Throne Blackjack" />
-                </div>
-                <div class="game-item__content">
-                  <h4 class="title">Throne Blackjack</h4>
-                  <p class="invest-info">Hacksaw Gaming</p>
-                  <a href="javascript:void(0)" class="cmn--btn active btn--md radius-0" onclick="playGame('https://demo.hacksawgaming.com/throne-blackjack', 'Throne Blackjack')">Play Now</a>
-                </div>
-              </div>
-              <div class="ball"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<header class="header">
+  <div class="container">
+    <div class="header-bottom">
+      <div class="header-bottom-area d-flex align-items-center justify-content-between">
 
-    <!-- Why Choose Us -->
-    <section class="why-section padding-top padding-bottom overflow-hidden">
-      <div class="container">
-        <div class="row justify-content-center gy-5">
-          <div class="col-lg-5 col-xl-4">
-            <div class="section-header mb-4 animate__animated animate__fadeInLeft">
-              <h2 class="section-header__title">Why Join the Royal Court?</h2>
-              <p>
-                Sorteroyal offers a regal gaming experience with no risks, just pure fun using virtual coins in a vibrant, secure community.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-7 col-xl-7">
-            <div class="row gy-4 justify-content-center">
-              <!-- 1 Regal Security -->
-              <div class="col-md-6">
-                <div class="why-item animate__animated animate__fadeInUp">
-                  <div class="why-item__thumb">
-                    <i class="fas fa-crown"></i>
-                  </div>
-                  <div class="why-item__content">
-                    <h4 class="title">Regal Security</h4>
-                    <p>Play safely with virtual treasures in a protected kingdom.</p>
-                  </div>
-                </div>
-              </div>
-              <!-- 2 Diverse Games -->
-              <div class="col-md-6">
-                <div class="why-item animate__animated animate__fadeInUp animate__delay-1s">
-                  <div class="why-item__thumb">
-                    <i class="fas fa-dice"></i>
-                  </div>
-                  <div class="why-item__content">
-                    <h4 class="title">Diverse Games</h4>
-                    <p>Enjoy slots, poker, roulette, and more with stunning visuals.</p>
-                  </div>
-                </div>
-              </div>
-              <!-- 3 Daily Treasures -->
-              <div class="col-md-6">
-                <div class="why-item animate__animated animate__fadeInUp animate__delay-2s">
-                  <div class="why-item__thumb">
-                    <i class="fas fa-gem"></i>
-                  </div>
-                  <div class="why-item__content">
-                    <h4 class="title">Daily Treasures</h4>
-                    <p>Earn free coins daily to fuel your royal adventures.</p>
-                  </div>
-                </div>
-              </div>
-              <!-- 4 Noble Community -->
-              <div class="col-md-6">
-                <div class="why-item animate__animated animate__fadeInUp animate__delay-3s">
-                  <div class="why-item__thumb">
-                    <i class="fas fa-users"></i>
-                  </div>
-                  <div class="why-item__content">
-                    <h4 class="title">Noble Community</h4>
-                    <p>Connect, compete, and share victories with fellow nobles.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <!-- Logo -->
+        <div class="logo">
+          <a href="/"><img src="/assets/images/logo-royal.png" alt="Sorteroyal Logo" class="logo-img" /></a>
         </div>
-      </div>
-    </section>
 
-    <!-- How Section -->
-    <section class="how-section padding-top padding-bottom bg_img" style="background: url(/assets/images/how/bg-royal.jpg)">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-6 col-md-8">
-            <div class="section-header text-center animate__animated animate__fadeInDown">
-              <h2 class="section-header__title">How to Claim Your Throne</h2>
-              <p>
-                Sign up for free, receive 10,000 royal coins, and embark on your gaming quest instantly—no downloads required.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="row gy-5 justify-content-center">
-          <div class="col-sm-6 col-md-4 col-lg-4 col-sm-8">
-            <div class="how-item animate__animated animate__fadeInUp">
-              <div class="how-item__thumb">
-                <i class="fas fa-user-plus"></i>
-                <div class="badge badge--lg badge--round radius-50">01</div>
-              </div>
-              <div class="how-item__content">
-                <h4 class="title">Enlist & Enter</h4>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-4 col-sm-8">
-            <div class="how-item animate__animated animate__fadeInUp animate__delay-1s">
-              <div class="how-item__thumb">
-                <i class="fas fa-coins"></i>
-                <div class="badge badge--lg badge--round radius-50">02</div>
-              </div>
-              <div class="how-item__content">
-                <h4 class="title">Claim Royal Coins</h4>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-4 col-sm-8">
-            <div class="how-item animate__animated animate__fadeInUp animate__delay-2s">
-              <div class="how-item__thumb">
-                <i class="fas fa-gamepad"></i>
-                <div class="badge badge--lg badge--round radius-50">03</div>
-              </div>
-              <div class="how-item__content">
-                <h4 class="title">Choose & Play</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        <!-- Mobile Toggle Button -->
+        <button class="navbar-toggler d-lg-none header-trigger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+        </button>
 
-    <!-- FAQ Section -->
-    <section class="faq-section padding-top padding-bottom overflow-hidden">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-7 col-xl-6 col-md-8">
-            <div class="section-header text-center animate__animated animate__fadeInDown">
-              <h2 class="section-header__title">Royal Inquiries</h2>
-              <p>Find answers to common questions about Sorteroyal’s majestic gaming experience.</p>
-            </div>
-          </div>
-        </div>
-        <div class="faq-wrapper">
-          <!-- 1 -->
-          <div class="faq-item animate__animated animate__fadeInUp" role="button" aria-expanded="false" aria-controls="faq-1">
-            <div class="faq-item__title">
-              <h5 class="title">1. Is Sorteroyal a real-money casino?</h5>
-              <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-            </div>
-            <div class="faq-item__content" id="faq-1">
-              <p>No, Sorteroyal is a social gaming platform for fun only, using virtual coins with no cash value.</p>
-            </div>
-          </div>
-          <!-- 2 -->
-          <div class="faq-item animate__animated animate__fadeInUp animate__delay-1s" role="button" aria-expanded="false" aria-controls="faq-2">
-            <div class="faq-item__title">
-              <h5 class="title">2. Do I need to register to play?</h5>
-              <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-            </div>
-            <div class="faq-item__content" id="faq-2">
-              <p>Yes, registration unlocks our full game library and exclusive features.</p>
-            </div>
-          </div>
-          <!-- 3 -->
-          <div class="faq-item animate__animated animate__fadeInUp animate__delay-2s" role="button" aria-expanded="false" aria-controls="faq-3">
-            <div class="faq-item__title">
-              <h5 class="title">3. What games are available?</h5>
-              <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-            </div>
-            <div class="faq-item__content" id="faq-3">
-              <p>Enjoy slots, poker, roulette, and more from top providers like Pragmatic Play and Evolution Gaming.</p>
-            </div>
-          </div>
-          <!-- 4 -->
-          <div class="faq-item animate__animated animate__fadeInUp animate__delay-3s" role="button" aria-expanded="false" aria-controls="faq-4">
-            <div class="faq-item__title">
-              <h5 class="title">4. Can I play without internet?</h5>
-              <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-            </div>
-            <div class="faq-item__content" id="faq-4">
-              <p>No, an internet connection is required to access our live community and games.</p>
-            </div>
-          </div>
-          <!-- 5 -->
-          <div class="faq-item animate__animated animate__fadeInUp" role="button" aria-expanded="false" aria-controls="faq-5">
-            <div class="faq-item__title">
-              <h5 class="title">5. How do I earn more coins?</h5>
-              <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-            </div>
-            <div class="faq-item__content" id="faq-5">
-              <p>Earn coins through daily logins, leaderboard rankings, or special events.</p>
-            </div>
-          </div>
-          <!-- 6 -->
-          <div class="faq-item animate__animated animate__fadeInUp animate__delay-1s" role="button" aria-expanded="false" aria-controls="faq-6">
-            <div class="faq-item__title">
-              <h5 class="title">6. Is Sorteroyal mobile-friendly?</h5>
-              <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-            </div>
-            <div class="faq-item__content" id="faq-6">
-              <p>Yes, our platform is fully responsive for seamless play on phones, tablets, and desktops.</p>
-            </div>
-          </div>
-          <!-- 7 -->
-          <div class="faq-item animate__animated animate__fadeInUp animate__delay-2s" role="button" aria-expanded="false" aria-controls="faq-7">
-            <div class="faq-item__title">
-              <h5 class="title">7. How do I join?</h5>
-              <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-            </div>
-            <div class="faq-item__content" id="faq-7">
-              <p>Click “Register” on the homepage, fill out the form, and receive 10,000 free coins to start!</p>
-            </div>
-          </div>
-          <!-- 8 -->
-          <div class="faq-item animate__animated animate__fadeInUp animate__delay-3s" role="button" aria-expanded="false" aria-controls="faq-8">
-            <div class="faq-item__title">
-              <h5 class="title">8. Can I invite friends?</h5>
-              <span class="faq-toggle"><i class="fas fa-plus"></i></span>
-            </div>
-            <div class="faq-item__content" id="faq-8">
-              <p>Yes! Invite friends and earn bonus coins for each new noble who joins your court.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg">
+          <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav menu">
+              <li class="nav-item"><a class="nav-link" href="/">Palace Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="/about/">Royal Story</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="/games/">
+                  Royal Games
+                  <span class="badge badge--sm badge--base text-dark">NEW</span>
+                </a>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="/contact/">Summon Us</a></li>
 
-    <!-- Top Players Section -->
-    <section class="top-section padding-top padding-bottom bg_img" style="background: url(/assets/images/top/bg-royal.png) center">
-      <div class="container">
-        <div class="row align-items-center gy-5 justify-content-center">
-          <div class="col-lg-4 col-md-8">
-            <h3 class="part-title mb-4 animate__animated animate__fadeInLeft">Noble Champions</h3>
-            <div class="top-investor-slider">
-              <div class="investor-item">
-                <div class="investor-item__thumb">
-                  <img src="/assets/images/top/champion1.png" alt="Champion" />
-                  <p class="amount">150,000 coins</p>
-                </div>
-                <div class="investor-item__content">
-                  <h6 class="name">Lord Edward</h6>
-                </div>
-              </div>
-              <div class="investor-item">
-                <div class="investor-item__thumb">
-                  <img src="/assets/images/top/champion2.png" alt="Champion" />
-                  <p class="amount">300,000 coins</p>
-                </div>
-                <div class="investor-item__content">
-                  <h6 class="name">Lady Isabella</h6>
-                </div>
-              </div>
-              <div class="investor-item">
-                <div class="investor-item__thumb">
-                  <img src="/assets/images/top/champion3.png" alt="Champion" />
-                  <p class="amount">500,000 coins</p>
-                </div>
-                <div class="investor-item__content">
-                  <h6 class="name">Sir William</h6>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-8 text-center">
-            <div class="cla-wrapper animate__animated animate__fadeInUp">
-              <h3 class="title mb-4">Fun Awaits in the Royal Halls</h3>
-              <a href="/games/" class="cmn--btn active btn--md radius-0">Begin Your Quest</a>
-              <div class="thumb">
-                <img src="/assets/images/top/bg-royal2.png" alt="Royal Call" class="img-fluid" />
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-8">
-            <h3 class="part-title mb-4 animate__animated animate__fadeInRight">Legendary Scorers</h3>
-            <div class="top-investor-slider">
-              <div class="investor-item">
-                <div class="investor-item__thumb">
-                  <img src="/assets/images/top/champion4.png" alt="Scorer" />
-                  <p class="amount">200,000 coins</p>
-                </div>
-                <div class="investor-item__content">
-                  <h6 class="name">Duchess Clara</h6>
-                </div>
-              </div>
-              <div class="investor-item">
-                <div class="investor-item__thumb">
-                  <img src="/assets/images/top/champion5.png" alt="Scorer" />
-                  <p class="amount">250,000 coins</p>
-                </div>
-                <div class="investor-item__content">
-                  <h6 class="name">Knight Henry</h6>
-                </div>
-              </div>
-              <div class="investor-item">
-                <div class="investor-item__thumb">
-                  <img src="/assets/images/top/champion6.png" alt="Scorer" />
-                  <p class="amount">400,000 coins</p>
-                </div>
-                <div class="investor-item__content">
-                  <h6 class="name">Baroness Sophia</h6>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonial Section -->
-    <section class="testimonial-section padding-top padding-bottom overflow-hidden">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-7 col-xl-6 col-md-8">
-            <div class="section-header text-center animate__animated animate__fadeInDown">
-              <h2 class="section-header__title">Words from the Court</h2>
-              <p>
-                Hear from our noble players about their Sorteroyal adventures.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-slider">
-          <div class="single-slide">
-            <div class="testimonial-item bg_img" style="background: url(/assets/images/testimonial/bg-royal.png) center">
-              <div class="testimonial-inner">
-                <div class="testimonial-item__content">
-                  <div class="quote-icon">
-                    <i class="fas fa-quote-left"></i>
+              <!-- Auth Section (Works in Desktop + Mobile) -->
+              <li class="nav-item mt-3 mt-lg-0 ms-lg-3">
+                <div class="auth-section d-flex flex-column flex-lg-row align-items-center">
+                  <div id="auth-container">
+                    <a href="javascript:void(0)" id="auth-btn" class="cmn--btn active btn--md" onclick="showAuthModal()">Enter/Register</a>
                   </div>
-                  <p>The game variety is amazing! It’s pure fun without any risks.</p>
-                </div>
-                <div class="thumb-wrapper">
-                  <div class="thumb">
-                    <img src="/assets/images/top/champion1.png" alt="Testimonial" />
-                  </div>
-                  <div class="content">
-                    <h6 class="name">Lord Edward</h6>
-                    <span class="designation">Royal Slot Master</span>
+                  <div id="user-account" class="ms-lg-3 mt-2 mt-lg-0 d-flex align-items-center">
+                    <div id="user-circle" class="user-circle d-none">
+                      <span id="user-name"></span>
+                      <div class="user-dropdown">
+                        <div id="user-details"></div>
+                        <a href="javascript:void(0)" id="logout-btn" onclick="logout()">Leave the Court</a>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="single-slide">
-            <div class="testimonial-item bg_img" style="background: url(/assets/images/testimonial/bg-royal.png) center">
-              <div class="testimonial-inner">
-                <div class="testimonial-item__content">
-                  <div class="quote-icon">
-                    <i class="fas fa-quote-left"></i>
-                  </div>
-                  <p>Signing up was a breeze, and the coins keep the excitement going!</p>
-                </div>
-                <div class="thumb-wrapper">
-                  <div class="thumb">
-                    <img src="/assets/images/top/champion2.png" alt="Testimonial" />
-                  </div>
-                  <div class="content">
-                    <h6 class="name">Lady Isabella</h6>
-                    <span class="designation">Poker Queen</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="single-slide">
-            <div class="testimonial-item bg_img" style="background: url(/assets/images/testimonial/bg-royal.png) center">
-              <div class="testimonial-inner">
-                <div class="testimonial-item__content">
-                  <div class="quote-icon">
-                    <i class="fas fa-quote-left"></i>
-                  </div>
-                  <p>It feels like a grand casino, but it’s all for fun!</p>
-                </div>
-                <div class="thumb-wrapper">
-                  <div class="thumb">
-                    <img src="/assets/images/top/champion3.png" alt="Testimonial" />
-                  </div>
-                  <div class="content">
-                    <h6 class="name">Sir William</h6>
-                    <span class="designation">Roulette Champion</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer-section bg_img" style="background: url(/assets/images/footer/bg-royal.jpg) center">
-      <div class="footer-top">
-        <div class="container">
-          <div class="footer-wrapper d-flex flex-wrap align-items-center justify-content-md-between justify-content-center">
-            <div class="logo mb-3 mb-md-0">
-              <a href="/"><img src="/assets/images/logo-royal.png" alt="Sorteroyal Logo" class="logo-img" /></a>
-            </div>
-            <ul class="footer-links d-flex flex-wrap justify-content-center">
-              <li><a href="/games/">Royal Games</a></li>
-              <li><a href="/terms-conditions/" class="active">Royal Decree</a></li>
-              <li><a href="/policy/">Privacy Scroll</a></li>
-              <li><a href="/cookies-policy/">Cookie Edict</a></li>
-              <li><a href="/responsible-gaming/">Wise Gaming</a></li>
+              </li>
             </ul>
           </div>
-        </div>
+        </nav>
+
       </div>
-      <div class="footer-bottom">
+    </div>
+  </div>
+</header>
+
+
+
+      <!-- Royal Gaming Banner Section with Carousel -->
+      <section class="royal-banner-section" style="background: linear-gradient(135deg, #0f0c29 0%, #1a1a4e 50%, #24243e 100%);">
         <div class="container">
-          <div class="footer-wrapper d-flex flex-wrap justify-content-center align-items-center text-center">
-            <p class="copyright text-white">
-              Copyright &copy; 2025 All Rights Reserved. | Virtual coins hold no cash value | For amusement only | info@sorteroyal.com
-            </p>
-            <p class="text-white mt-2 small" style="max-width: 800px">
-              For those 18 and above. Sorteroyal offers social gaming with no real stakes. We promote responsible play with self-restriction options and support resources.<br />
-              Certified partners: <strong>GamCare</strong>, <strong>BeGambleAware</strong>, <strong>18+</strong>
-            </p>
+          <div class="royal-banner-wrapper">
+            <div class="royal-banner-content">
+              <h1 class="royal-banner-title">
+                <span class="royal-crown-icon"></span> SorteRoyal 
+                <span class="royal-accent">Royal Social Gaming</span>
+              </h1>
+              <p class="royal-banner-subtitle">
+                Step into our majestic kingdom of thrilling casino-inspired games. Play for free with virtual coins, 
+                connect with nobles, and claim your daily treasures.
+              </p>
+              <div class="royal-button-wrapper">
+                <a href="/games/" class="royal-btn">
+                  Enter the Royal Games
+                  <span class="royal-btn-icon">→</span>
+                </a>
+                <div class="royal-sparkle"></div>
+              </div>
+            </div>
+            
+            <!-- Image Carousel -->
+            <div class="royal-banner-image">
+              <div class="royal-carousel">
+                <div class="royal-carousel-inner">
+                  <div class="royal-carousel-item active">
+                    <img src="/assets/images/banner/royal123.jpg" alt="Royal Throne" class="royal-thumbnail">
+                    <div class="royal-glow gold"></div>
+                  </div>
+                  <div class="royal-carousel-item">
+                    <img src="/assets/images/banner/royal12.jpg" alt="Royal Coins" class="royal-thumbnail">
+                    <div class="royal-glow purple"></div>
+                  </div>
+                  <div class="royal-carousel-item">
+                    <img src="/assets/images/banner/royal16.jpg" alt="Royal Cards" class="royal-thumbnail">
+                    <div class="royal-glow blue"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <style>  .custom--modal{
+        display: none; 
+    display: flex; justify-content: center; align-items: center; 
+      }
+      .game-modal{
+        display: flex; justify-content: center; align-items: center;
+      }
+         .alert-modal{
+        display: flex; justify-content: center; align-items: center;
+     }
+        /* Carousel Styles */
+        .royal-carousel {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          border-radius: 15px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .royal-carousel-inner {
+          display: flex;
+          transition: transform 0.8s ease;
+          height: 100%;
+        }
+        
+        .royal-carousel-item {
+          min-width: 100%;
+          position: relative;
+        }
+        
+        .royal-thumbnail {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+          transition: opacity 0.5s ease;
+        }
+        
+        /* Glow Effects */
+        .royal-glow {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+          animation: glowPulse 4s infinite alternate;
+        }
+        
+        .gold { background: radial-gradient(circle at center, rgba(248, 213, 107, 0.4) 0%, transparent 70%); }
+        .purple { background: radial-gradient(circle at center, rgba(154, 107, 248, 0.4) 0%, transparent 70%); }
+        .blue { background: radial-gradient(circle at center, rgba(107, 178, 248, 0.4) 0%, transparent 70%); }
+        
+        @keyframes glowPulse {
+          0% { opacity: 0.3; transform: scale(0.95); }
+          100% { opacity: 0.7; transform: scale(1.05); }
+        }
+      </style>
+
+
+
+
+      <!-- Game Section -->
+      <section class="game-section padding-top padding-bottom bg_img" style="background: url(/assets/images/banner/royal-b1.png)">
+      
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-6 col-xl-5">
+              <div class="section-header text-center animate__animated animate__fadeInDown">
+                <h2 class="section-header__title">Majestic Games Await</h2>
+                <p>
+                  Explore our royal collection of casino-inspired games, powered by top providers. Play with virtual coins for endless fun.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="row gy-1 justify-content-center">
+            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-8">
+              <div class="game-item animate__animated animate__fadeInUp">
+                <div class="game-inner">
+                  <div class="game-item__thumb">
+                    <img src="/assets/images/rotten.jpg" alt="Rotten" />
+                  </div>
+                  <div class="game-item__content">
+                    <h4 class="title">Rotten</h4>
+                    <p class="invest-info">Royal Gaming</p>
+                    <a href="javascript:void(0)" class="cmn--btn active btn--md radius-0" onclick="playGame('https://d2q0k52vlk25jc.cloudfront.net/launcher/static-launcher.html?gameid=1209&channel=desktop&language=en&currency=USD&partner=gamdom_prod&mode=demo&token=&lobbyurl=http%3A%2F%2Fgamdom.com/casino', 'Rotten')">Play Now</a>
+                  </div>
+                </div>
+                <div class="ball"></div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-8">
+              <div class="game-item animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="game-inner">
+                  <div class="game-item__thumb">
+                    <img src="/assets/images/Hounds-of-Hell.webp" alt="Hounds of Hell" />
+                  </div>
+                  <div class="game-item__content">
+                    <h4 class="title">Hounds of Hell</h4>
+                    <p class="invest-info">Hounds of Hell Boosted</p>
+                    <a href="javascript:void(0)" class="cmn--btn active btn--md radius-0" onclick="playGame('https://d2q0k52vlk25jc.cloudfront.net/launcher/static-launcher-gamdom.html?gameid=1952&channel=desktop&language=de&currency=USD&partner=gamdom_prod&mode=demo&token=&lobbyurl=http%3A%2F%2Fgamdom.com/casino', 'Hounds of Hell')">Play Now</a>
+                  </div>
+                </div>
+                <div class="ball"></div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-8">
+              <div class="game-item animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="game-inner">
+                  <div class="game-item__thumb">
+                    <img src="/assets/images/gateofolympus.png" alt="Gates of Olympus" />
+                  </div>
+                  <div class="game-item__content">
+                    <h4 class="title">Gates of Olympus</h4>
+                    <p class="invest-info">Evolution Gaming</p>
+                    <a href="javascript:void(0)" class="cmn--btn active btn--md radius-0" onclick="playGame('https://demogamesfree.aplkutuybu.net/gs2c/openGame.do?gameSymbol=vs20olympgate&lang=en&cur=USD&lobbyUrl=https://gamdom.com/casino&stylename=gmdm_gamdom&jurisdiction=99&isGameUrlApiCalled=true', 'Gates of Olympus')">Play Now</a>
+                  </div>
+                </div>
+                <div class="ball"></div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-8">
+              <div class="game-item animate__animated animate__fadeInUp animate__delay-3s">
+                <div class="game-inner">
+                  <div class="game-item__thumb">
+                    <img src="/assets/images/wanted.jpeg" alt="Wanted" />
+                  </div>
+                  <div class="game-item__content">
+                    <h4 class="title">Wanted</h4>
+                    <p class="invest-info">Wanted</p>
+                    <a href="javascript:void(0)" class="cmn--btn active btn--md radius-0" onclick="playGame('https://d2q0k52vlk25jc.cloudfront.net/launcher/static-launcher-gamdom.html?gameid=1547&channel=desktop&language=de&currency=USD&partner=gamdom_prod&mode=demo&token=&lobbyurl=http%3A%2F%2Fgamdom.com/casino', 'Wanted')">Play Now</a>
+                  </div>
+                </div>
+                <div class="ball"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+
+      </section>
+<!-- Royal About Section with Smooth Top Curve -->
+<section class="royal-about-section" style="background: #00103b; position: relative;">
+
+
+
+  <div class="royal-container">
+    <div class="royal-about-wrapper">
+      <div class="royal-about-content">
+        <div class="royal-section-header">
+          <h2 class="royal-section-title">
+            <span class="royal-crown-decoration"></span> Discover SorteRoyal <span class="royal-crown-decoration"></span>
+          </h2>
+          <p class="royal-section-description">
+            SorteRoyal invites you to our majestic social gaming realm where casino-inspired entertainment meets a vibrant royal community. 
+            Play with virtual coins in our court of games fit for nobility.
+          </p>
+          <div class="royal-features">
+            <div class="royal-feature-item">
+              <div class="royal-feature-icon">♛</div>
+              <span>Royal-themed social games</span>
+            </div>
+            <div class="royal-feature-item">
+              <div class="royal-feature-icon">🎮</div>
+              <span>Virtual coin gameplay</span>
+            </div>
+            <div class="royal-feature-item">
+              <div class="royal-feature-icon">🏆</div>
+              <span>Daily rewards & treasures</span>
+            </div>
+          </div>
+          <div class="royal-button-wrapper">
+            <a href="/about/" class="royal-about-btn">
+              Learn the Royal Legend
+              <span class="royal-btn-arrow">→</span>
+            </a>
+            <div class="royal-btn-glow"></div>
           </div>
         </div>
       </div>
-    </footer>
+      <div class="royal-about-image">
+        <div class="royal-image-frame">
+          <img src="/assets/images/about-royal.png" alt="SorteRoyal Kingdom" class="royal-about-img">
+          <div class="royal-image-shine"></div>
+          <div class="royal-image-corners">
+            <span class="corner top-left"></span>
+            <span class="corner top-right"></span>
+            <span class="corner bottom-left"></span>
+            <span class="corner bottom-right"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+      <!-- Why Choose Us -->
+      <section class="why-section padding-top padding-bottom overflow-hidden">
+        <div class="container">
+          <div class="row justify-content-center gy-5">
+            <div class="col-lg-5 col-xl-4">
+              <div class="section-header mb-4 animate__animated animate__fadeInLeft">
+                <h2 class="section-header__title">Why Join the Royal Court?</h2>
+                <p>
+                 Sorteroyal offers a regal gaming experience where every player feels like royalty. Enjoy a world of thrilling games with zero risks — no real money involved — just pure entertainment powered by virtual coins. Immerse yourself in a vibrant, interactive community designed for fun, connection, and friendly competition. </p>
+              </div>
+            </div>
+            <div class="col-lg-7 col-xl-7">
+              <div class="row gy-4 justify-content-center">
+                <!-- 1 Regal Security -->
+                <div class="col-md-6">
+                  <div class="why-item animate__animated animate__fadeInUp">
+                    <div class="why-item__thumb">
+                      <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="why-item__content">
+                      <h4 class="title">Regal Security</h4>
+                      <p>Play safely with virtual treasures in a protected kingdom.</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- 2 Diverse Games -->
+                <div class="col-md-6">
+                  <div class="why-item animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="why-item__thumb">
+                      <i class="fas fa-dice"></i>
+                    </div>
+                    <div class="why-item__content">
+                      <h4 class="title">Diverse Games</h4>
+                      <p>Enjoy slots, poker, roulette, and more with stunning visuals.</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- 3 Daily Treasures -->
+                <div class="col-md-6">
+                  <div class="why-item animate__animated animate__fadeInUp animate__delay-2s">
+                    <div class="why-item__thumb">
+                      <i class="fas fa-gem"></i>
+                    </div>
+                    <div class="why-item__content">
+                      <h4 class="title">Daily Treasures</h4>
+                      <p>Earn free coins daily to fuel your royal adventures.</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- 4 Noble Community -->
+                <div class="col-md-6">
+                  <div class="why-item animate__animated animate__fadeInUp animate__delay-3s">
+                    <div class="why-item__thumb">
+                      <i class="fas fa-users"></i>
+                    </div>
+                    <div class="why-item__content">
+                      <h4 class="title">Noble Community</h4>
+                      <p>Connect, compete, and share victories with fellow nobles.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- How to Play Section -->
+    <section class="how-to-play-section" style="background: url(/assets/images/banner/thumb-royal.png) center/cover no-repeat;">
+      <div class="container">
+        <div class="section-header text-center animate__animated animate__fadeInDown">
+          <h2 class="section-title">How to Claim Your Throne</h2>
+          <p>Sign up for free, receive 10,000 royal coins, and embark on your gaming quest instantly—no downloads required.</p>
+        </div>
+
+        <div class="how-cards-wrapper">
+          <!-- Step 1 -->
+          <div class="how-card animate__animated animate__fadeInUp">
+            <div class="icon-wrapper">
+              <i class="fas fa-user-plus"></i>
+              <span class="step-badge" style="font-size: 20px;">01</span>
+            </div>
+            <h4 class="card-title">Enlist & Enter</h4>
+            <p class="card-description">Create your free account in seconds to begin your royal journey</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="how-card animate__animated animate__fadeInUp animate__delay-1s">
+            <div class="icon-wrapper">
+              <i class="fas fa-coins"></i>
+              <span class="step-badge" style="font-size: 20px;">02</span>
+            </div>
+            <h4 class="card-title">Claim Royal Coins</h4>
+            <p class="card-description">Receive your 10,000 coin welcome bonus instantly</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="how-card animate__animated animate__fadeInUp animate__delay-2s">
+            <div class="icon-wrapper">
+              <i class="fas fa-gamepad"></i>
+              <span class="step-badge" style="font-size: 20px;">03</span>
+            </div>
+            <h4 class="card-title">Choose & Play</h4>
+            <p class="card-description">Select from our royal collection of games and start playing</p>
+          </div>
+        </div>
+      
+      </div>
+    </section>
+
+      <!-- FAQ Section -->
+      <section class="faq-section padding-top padding-bottom overflow-hidden">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-7 col-xl-6 col-md-8">
+              <div class="section-header text-center animate__animated animate__fadeInDown">
+                <h2 class="section-header__title">Royal Inquiries</h2>
+                <p>Find answers to common questions about Sorteroyal's majestic gaming experience.</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-wrapper">
+            <!-- 1 -->
+            <div class="faq-item animate__animated animate__fadeInUp" role="button" aria-expanded="false" aria-controls="faq-1">
+              <div class="faq-item__title">
+                <h5 class="title">1. Is Sorteroyal a real-money casino?</h5>
+                <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+              </div>
+              <div class="faq-item__content" id="faq-1">
+                <p>No, Sorteroyal is a social gaming platform for fun only, using virtual coins with no cash value.</p>
+              </div>
+            </div>
+            <!-- 2 -->
+            <div class="faq-item animate__animated animate__fadeInUp animate__delay-1s" role="button" aria-expanded="false" aria-controls="faq-2">
+              <div class="faq-item__title">
+                <h5 class="title">2. Do I need to register to play?</h5>
+                <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+              </div>
+              <div class="faq-item__content" id="faq-2">
+                <p>Yes, registration unlocks our full game library and exclusive features.</p>
+              </div>
+            </div>
+            <!-- 3 -->
+            <div class="faq-item animate__animated animate__fadeInUp animate__delay-2s" role="button" aria-expanded="false" aria-controls="faq-3">
+              <div class="faq-item__title">
+                <h5 class="title">3. What games are available?</h5>
+                <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+              </div>
+              <div class="faq-item__content" id="faq-3">
+                <p>Enjoy slots, poker, roulette, and more from top providers like Pragmatic Play and Evolution Gaming.</p>
+              </div>
+            </div>
+            <!-- 4 -->
+            <div class="faq-item animate__animated animate__fadeInUp animate__delay-3s" role="button" aria-expanded="false" aria-controls="faq-4">
+              <div class="faq-item__title">
+                <h5 class="title">4. Can I play without internet?</h5>
+                <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+              </div>
+              <div class="faq-item__content" id="faq-4">
+                <p>No, an internet connection is required to access our live community and games.</p>
+              </div>
+            </div>
+            <!-- 5 -->
+            <div class="faq-item animate__animated animate__fadeInUp" role="button" aria-expanded="false" aria-controls="faq-5">
+              <div class="faq-item__title">
+                <h5 class="title">5. How do I earn more coins?</h5>
+                <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+              </div>
+              <div class="faq-item__content" id="faq-5">
+                <p>Earn coins through daily logins, leaderboard rankings, or special events.</p>
+              </div>
+            </div>
+            <!-- 6 -->
+            <div class="faq-item animate__animated animate__fadeInUp animate__delay-1s" role="button" aria-expanded="false" aria-controls="faq-6">
+              <div class="faq-item__title">
+                <h5 class="title">6. Is Sorteroyal mobile-friendly?</h5>
+                <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+              </div>
+              <div class="faq-item__content" id="faq-6">
+                <p>Yes, our platform is fully responsive for seamless play on phones, tablets, and desktops.</p>
+              </div>
+            </div>
+            <!-- 7 -->
+            <div class="faq-item animate__animated animate__fadeInUp animate__delay-2s" role="button" aria-expanded="false" aria-controls="faq-7">
+              <div class="faq-item__title">
+                <h5 class="title">7. How do I join?</h5>
+                <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+              </div>
+              <div class="faq-item__content" id="faq-7">
+                <p>Click "Register" on the homepage, fill out the form, and receive 10,000 free coins to start!</p>
+              </div>
+            </div>
+            <!-- 8 -->
+            <div class="faq-item animate__animated animate__fadeInUp animate__delay-3s" role="button" aria-expanded="false" aria-controls="faq-8">
+              <div class="faq-item__title">
+                <h5 class="title">8. Can I invite friends?</h5>
+                <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+              </div>
+              <div class="faq-item__content" id="faq-8">
+                <p>Yes! Invite friends and earn bonus coins for each new noble who joins your court.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section class="testimonial-carousel-section">
+        <div class="container">
+          <h2 class="section-title text-center">Words from the Court</h2>
+          <div class="testimonial-carousel">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card">
+              <p class="quote">"The game variety is amazing! It's pure fun without any risks."</p>
+              <div class="user">
+                <img src="/assets/images/royal5.webp" alt="Lord Edward">
+                <div>
+                  <h6>Lord Edward</h6>
+                  <span>Royal Slot Master</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card">
+              <p class="quote">"Signing up was a breeze, and the coins keep the excitement going!"</p>
+              <div class="user">
+                <img src="/assets/images/royal6.jpeg" alt="Lady Isabella">
+                <div>
+                  <h6>Lady Isabella</h6>
+                  <span>Poker Queen</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="testimonial-card">
+              <p class="quote">"It feels like a grand casino, but it's all for fun!"</p>
+              <div class="user">
+                <img src="/assets/images/royal1.png" alt="Sir William">
+                <div>
+                  <h6>Sir William</h6>
+                  <span>Roulette Champion</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Top Players Section -->
+      <section class="top-players-section" style="background-color: #091638;">
+        <div class="container">
+          <h2 class="section-title text-center">Top Players</h2>
+          <div class="players-carousel">
+            <!-- Player 1 -->
+            <div class="player-card">
+              <img src="/assets/images/user1.jpeg" alt="Lord Edward" style="height: 200px;">
+              <div class="player-info">
+                <h6>Lord Edward</h6>
+                <p class="coins">150,000 coins</p>
+              </div>
+            </div>
+
+         
+
+            <!-- Player 2 -->
+            <div class="player-card">
+              <img src="/assets/images/user3.jpeg" alt="Sir William" style="height: 200px;">
+              <div class="player-info">
+                <h6>Lady Isabella</h6>
+                <p class="coins">500,000 coins</p>
+              </div>
+            </div>
+
+            <!-- Player 3 -->
+            <div class="player-card">
+              <img src="/assets/images/user4.jpeg" alt="Duchess Clara" style="height: 200px;">
+              <div class="player-info">
+                <h6>Duchess Clara</h6>
+                <p class="coins">200,000 coins</p>
+              </div>
+            </div>
+
+            <!-- Player 4 -->
+            <div class="player-card">
+              <img src="/assets/images/user5.jpeg" alt="Knight Henry" style="height: 200px; ">
+              <div class="player-info">
+                <h6>Knight Henry</h6>
+                <p class="coins">250,000 coins</p>
+              </div>
+            </div>
+   <!-- Player 5 -->
+            <div class="player-card">
+              <img src="/assets/images/user2.jpeg" alt="Lady Isabella" style="height: 200px;">
+              <div class="player-info">
+                <h6>Lady Isabella</h6>
+                <p class="coins">300,000 coins</p>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="bg-dark-secondary py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6 mb-4">
+              <h5 class="text-white mb-3">Sorteroyal</h5>
+              <p class="text-white">For those 18 and above. Sorteroyal offers social gaming with no real stakes. We promote responsible play with self-restriction options and support resources.</p>
+              <p class="text-white small">Certified partners: GamCare, BeGambleAware, 18+</p>
+            </div>
+          
+            <div class="col-lg-3 col-md-6 mb-4">
+              <h6 class="text-white mb-3">Legal</h6>
+              <ul class="list-unstyled">
+                <li><a href="../privacy/" class="text-white text-decoration-none">Privacy Policy</a></li>
+                <li><a href="../terms/" class="text-white text-decoration-none">Terms of Service</a></li>
+                <li><a href="../cookies/" class="text-white text-decoration-none">Cookies Policy</a></li>
+                     <li><a href="../responsiblegaming/" class="text-white text-decoration-none">Responsible Gaming</a></li>
+         
+              </ul>
+            </div>
+            <div class="col-lg-3 mb-4">
+              <h6 class="text-white mb-3">Contact Info</h6>
+              <p class="text-white mb-2">
+                <i class="fas fa-phone me-2"></i>+1 555-987-6543
+              </p>
+              <p class="text-white mb-2">
+                <i class="fas fa-envelope me-2"></i>support@sorteroyal.com
+              </p>
+              <div class="d-flex gap-3 mt-3">
+                <a href="javascript:void(0)" class="text-white fs-5"><i class="fab fa-facebook"></i></a>
+                <a href="javascript:void(0)" class="text-white fs-5"><i class="fab fa-twitter"></i></a>
+                <a href="javascript:void(0)" class="text-white fs-5"><i class="fab fa-instagram"></i></a>
+                <a href="javascript:void(0)" class="text-white fs-5"><i class="fab fa-discord"></i></a>
+              </div>
+            </div>
+          </div>
+          <hr class="border-purple">
+          <div class="row">
+            <div class="col-12 text-center">
+              <p class="text-white mb-0">&copy; 2025 Sorteroyal. All rights reserved.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <script>
+        // Simple Carousel Auto-rotation
+        document.addEventListener('DOMContentLoaded', function() {
+          const carousel = document.querySelector('.royal-carousel-inner');
+          const items = document.querySelectorAll('.royal-carousel-item');
+          let currentIndex = 0;
+          
+          function rotateCarousel() {
+            currentIndex = (currentIndex + 1) % items.length;
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+          }
+          
+          // Change image every 3 seconds
+          setInterval(rotateCarousel, 3000);
+          
+          // Add hover pause
+          const carouselContainer = document.querySelector('.royal-carousel');
+          let rotationInterval = setInterval(rotateCarousel, 3000);
+          
+          carouselContainer.addEventListener('mouseenter', () => {
+            clearInterval(rotationInterval);
+          });
+          
+          carouselContainer.addEventListener('mouseleave', () => {
+            rotationInterval = setInterval(rotateCarousel, 5000);
+          });
+        });
+      </script>
+    </div> <!-- End of main-content -->
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="/script.js"></script>
+    
+    <script>
+      // Age Verification Functions
+      function confirmAge() {
+        // Set a cookie to remember the verification
+        document.cookie = "ageVerified=true; path=/; max-age=2592000"; // 30 days
+        document.getElementById('ageVerificationPopup').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+      }
+      
+      function declineAge() {
+        // Redirect to a safe page or show a message
+        window.location.href = "https://www.google.com"; // Or show a message
+      }
+      
+      // Check if already verified
+      document.addEventListener('DOMContentLoaded', function() {
+        if (document.cookie.includes('ageVerified=true')) {
+          document.getElementById('ageVerificationPopup').style.display = 'none';
+          document.getElementById('mainContent').style.display = 'block';
+        } else {
+          document.getElementById('ageVerificationPopup').style.display = 'flex';
+        }
+      });
+    </script>
   </body>
 </html>
