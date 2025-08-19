@@ -39,7 +39,7 @@
          .alert-modal{
         display: flex; justify-content: center; align-items: center;
      }
-      /* Age Verification Popup Styles */
+        /* Age Verification Popup Styles */
       .age-verification-popup {
         position: fixed;
         top: 0;
@@ -55,7 +55,7 @@
       }
       
       .age-verification-content {
-        background: linear-gradient(135deg, #1a1a4e 0%, #0f0c29 100%);
+        background: linear-gradient(135deg, #44203c 0%, #0f0c29 100%);
         padding: 30px;
         border-radius: 15px;
         max-width: 600px;
@@ -147,20 +147,25 @@
     <!-- Main Content (hidden until age verification) -->
     <div class="main-content" id="mainContent">
     
-      <div class="overlay"></div>
-      <div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
-        <div class="cookie-content">
-          <h5>Royal Cookie Consent</h5>
-          <p>
-            We use cookies to enhance your majestic experience. By continuing, you agree to our
-            <a href="/cookies/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
-          </p>
-          <div class="cookie-buttons">
-            <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
-            <button class="cmn--btn" onclick="declineCookies()">Decline</button>
-          </div>
-        </div>
+<div class="overlay"></div>
+<div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
+  <div class="cookie-content">
+    <h5>Royal Cookie Consent</h5>
+
+    <div class="cookie-row">
+      <p>
+        We use cookies to enhance your majestic experience. By continuing, you agree to our
+        <a href="/cookies/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
+      </p>
+
+      <div class="cookie-buttons">
+        <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
+        <button class="cmn--btn" onclick="declineCookies()">Decline</button>
       </div>
+    </div>
+  </div>
+</div>
+
 
       <!-- Authentication Modal -->
       <div class="custom--modal" id="authModal" style="display: none; " >
@@ -257,9 +262,9 @@
                   <div id="auth-container">
                     <a href="javascript:void(0)" id="auth-btn" class="cmn--btn active btn--md" onclick="showAuthModal()">Enter/Register</a>
                   </div>
-                  <div id="user-account" class="ms-lg-3 mt-2 mt-lg-0 d-flex align-items-center">
+                   <div id="user-account" class="ms-lg-3 mt-2 mt-lg-0 d-flex align-items-center">
                     <div id="user-circle" class="user-circle d-none">
-                      <span id="user-name"></span>
+                               <span id="user-name" ></span>
                       <div class="user-dropdown">
                         <div id="user-details"></div>
                         <a href="javascript:void(0)" id="logout-btn" onclick="logout()">Leave the Court</a>
@@ -280,7 +285,7 @@
 
 
       <!-- Royal Gaming Banner Section with Carousel -->
-      <section class="royal-banner-section" style="background: linear-gradient(135deg, #0f0c29 0%, #1a1a4e 50%, #24243e 100%);">
+      <section class="royal-banner-section" style="background: linear-gradient(135deg, #402841 0%, #591b5f 50%, #2e0b2a 100%);">
         <div class="container">
           <div class="royal-banner-wrapper">
             <div class="royal-banner-content">
@@ -306,17 +311,10 @@
               <div class="royal-carousel">
                 <div class="royal-carousel-inner">
                   <div class="royal-carousel-item active">
-                    <img src="/assets/images/banner/royal123.jpg" alt="Royal Throne" class="royal-thumbnail">
+                    <img src="/assets/images/banner/b1.png" alt="Royal Throne" class="royal-thumbnail">
                     <div class="royal-glow gold"></div>
                   </div>
-                  <div class="royal-carousel-item">
-                    <img src="/assets/images/banner/royal12.jpg" alt="Royal Coins" class="royal-thumbnail">
-                    <div class="royal-glow purple"></div>
-                  </div>
-                  <div class="royal-carousel-item">
-                    <img src="/assets/images/banner/royal16.jpg" alt="Royal Cards" class="royal-thumbnail">
-                    <div class="royal-glow blue"></div>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -387,7 +385,7 @@
 
 
       <!-- Game Section -->
-      <section class="game-section padding-top padding-bottom bg_img" style="background: url(/assets/images/banner/royal-b1.png)">
+      <section class="game-section padding-top padding-bottom bg_img" style="background: url(/assets/images/banner/r.jpg)">
       
         <div class="container">
           <div class="row justify-content-center">
@@ -467,7 +465,7 @@
 
       </section>
 <!-- Royal About Section with Smooth Top Curve -->
-<section class="royal-about-section" style="background: #00103b; position: relative;">
+<section class="royal-about-section" style="background: #44203c; position: relative;">
 
 
 
@@ -588,7 +586,7 @@
       </section>
 
     <!-- How to Play Section -->
-    <section class="how-to-play-section" style="background: url(/assets/images/banner/thumb-royal.png) center/cover no-repeat;">
+    <section class="how-to-play-section" style="background: url(/assets/images/banner/thumb-royal.jpg) center/cover no-repeat;">
       <div class="container">
         <div class="section-header text-center animate__animated animate__fadeInDown">
           <h2 class="section-title">How to Claim Your Throne</h2>
@@ -725,52 +723,7 @@
           </div>
         </div>
       </section>
-
-      <!-- Testimonials Section -->
-      <section class="testimonial-carousel-section">
-        <div class="container">
-          <h2 class="section-title text-center">Words from the Court</h2>
-          <div class="testimonial-carousel">
-            <!-- Testimonial 1 -->
-            <div class="testimonial-card">
-              <p class="quote">"The game variety is amazing! It's pure fun without any risks."</p>
-              <div class="user">
-                <img src="/assets/images/royal5.webp" alt="Lord Edward">
-                <div>
-                  <h6>Lord Edward</h6>
-                  <span>Royal Slot Master</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Testimonial 2 -->
-            <div class="testimonial-card">
-              <p class="quote">"Signing up was a breeze, and the coins keep the excitement going!"</p>
-              <div class="user">
-                <img src="/assets/images/royal6.jpeg" alt="Lady Isabella">
-                <div>
-                  <h6>Lady Isabella</h6>
-                  <span>Poker Queen</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Testimonial 3 -->
-            <div class="testimonial-card">
-              <p class="quote">"It feels like a grand casino, but it's all for fun!"</p>
-              <div class="user">
-                <img src="/assets/images/royal1.png" alt="Sir William">
-                <div>
-                  <h6>Sir William</h6>
-                  <span>Roulette Champion</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Top Players Section -->
+  <!-- Top Players Section -->
       <section class="top-players-section" style="background-color: #091638;">
         <div class="container">
           <h2 class="section-title text-center">Top Players</h2>
@@ -825,14 +778,70 @@
         </div>
       </section>
 
+ <!-- Testimonials Section -->
+<section class="testimonial-cards-section py-5 my-5" style="  margin: 100px 0px !important;" >
+  <div class="container">
+    <h2 class="section-title text-center mb-5">Words from the Court</h2>
+
+    <div class="testimonial-cards">
+      
+      <!-- Testimonial 1 -->
+      <div class="testimonial-card">
+        <p class="quote">"The game variety is amazing! It's pure fun without any risks."</p>
+        <div class="user">
+          <img src="/assets/images/royal5.webp" alt="Lord Edward">
+          <div>
+            <h6>Lord Edward</h6>
+            <span>Royal Slot Master</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="testimonial-card">
+        <p class="quote">"Signing up was a breeze, and the coins keep the excitement going!"</p>
+        <div class="user">
+          <img src="/assets/images/royal6.jpeg" alt="Lady Isabella">
+          <div>
+            <h6>Lady Isabella</h6>
+            <span>Poker Queen</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="testimonial-card">
+        <p class="quote">"It feels like a grand casino, but it's all for fun!"</p>
+        <div class="user">
+          <img src="/assets/images/royal1.png" alt="Sir William">
+          <div>
+            <h6>Sir William</h6>
+            <span>Roulette Champion</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+    
       <!-- Footer -->
       <footer class="bg-dark-secondary py-5">
         <div class="container">
           <div class="row">
             <div class="col-lg-6 mb-4">
-              <h5 class="text-white mb-3">Sorteroyal</h5>
+                 <!-- Logo -->
+        <div class="logo" style="margin-bottom: 20px;">
+          <a href="/"><img src="/assets/images/logo-royal.png" alt="Sorteroyal Logo" class="logo-img" /></a>
+        </div>
               <p class="text-white">For those 18 and above. Sorteroyal offers social gaming with no real stakes. We promote responsible play with self-restriction options and support resources.</p>
-              <p class="text-white small">Certified partners: GamCare, BeGambleAware, 18+</p>
+                        <p class="partners small">
+      Certified partners:
+      <a href="https://www.gamcare.org.uk/" target="_blank" rel="noopener noreferrer">GamCare</a>,
+      <a href="https://www.gambleaware.org/" target="_blank" rel="noopener noreferrer">BeGambleAware</a>
+      <span class="age">• 18+</span>
+    </p>
             </div>
           
             <div class="col-lg-3 col-md-6 mb-4">
