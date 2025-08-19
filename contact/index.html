@@ -35,19 +35,24 @@
   </head>
   <body>
     <div class="overlay"></div>
-    <div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
-      <div class="cookie-content">
-        <h5>Royal Cookie Consent</h5>
-        <p>
-          We use cookies to enhance your majestic experience. By continuing, you agree to our
-          <a href="/cookies-policy/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
-        </p>
-        <div class="cookie-buttons">
-          <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
-          <button class="cmn--btn" onclick="declineCookies()">Decline</button>
-        </div>
+<div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
+  <div class="cookie-content">
+    <h5>Royal Cookie Consent</h5>
+
+    <div class="cookie-row">
+      <p>
+        We use cookies to enhance your majestic experience. By continuing, you agree to our
+        <a href="/cookies/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
+      </p>
+
+      <div class="cookie-buttons">
+        <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
+        <button class="cmn--btn" onclick="declineCookies()">Decline</button>
       </div>
     </div>
+  </div>
+</div>
+
 
     <!-- Authentication Modal -->
     <div class="custom--modal" id="authModal" style="display: none">
@@ -145,7 +150,7 @@
                   </div>
                   <div id="user-account" class="ms-lg-3 mt-2 mt-lg-0 d-flex align-items-center">
                     <div id="user-circle" class="user-circle d-none">
-                      <span id="user-name"></span>
+                               <span id="user-name" ></span>
                       <div class="user-dropdown">
                         <div id="user-details"></div>
                         <a href="javascript:void(0)" id="logout-btn" onclick="logout()">Leave the Court</a>
@@ -240,7 +245,7 @@
       }
 
       .contact-card {
-        background: rgba(26, 26, 78, 0.7);
+        background: rgba(52, 28, 66, 0.7);
         border: 1px solid rgba(248, 213, 107, 0.3);
         border-radius: 12px;
         padding: 30px;
@@ -288,7 +293,7 @@
       }
 
       .contact-form {
-        background: rgba(26, 26, 78, 0.7);
+        background: rgba(92, 51, 97, 0.3);
         border: 1px solid rgba(248, 213, 107, 0.3);
         border-radius: 12px;
         padding: 40px;
@@ -371,7 +376,7 @@
     }
     body {
       font-family: 'Poppins', sans-serif;
-      background: #0e0e1a;
+      background: #1a0e19;
       color: #f0f0f0;
       line-height: 1.7;
     }
@@ -444,7 +449,7 @@
       text-align: center;
       margin-top: 3rem;
       padding: 2rem;
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
+        background: rgba(92, 51, 97, 0.3);
       border-radius: 10px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     }
@@ -505,7 +510,7 @@
           <i class="fas fa-phone-alt"></i>
           <h3>Royal Hotline</h3>
           <p>Speak directly with a member of our royal court for immediate assistance.</p>
-          <a href="tel:+923001234567">+92 300 1234567</a>
+          <a href="tel:+1 703-701-9964">+1 703-701-9964</a>
           <p style="font-size:0.85rem; color:#aaa;">Mon-Fri: 9AM-6PM</p>
         </div>
 
@@ -564,9 +569,17 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6 mb-4">
-            <h5 class="text-white mb-3">Sorteroyal</h5>
+                            <!-- Logo -->
+        <div class="logo" style="margin-bottom: 20px;">
+          <a href="/"><img src="/assets/images/logo-royal.png" alt="Sorteroyal Logo" class="logo-img" /></a>
+        </div>
             <p class="text-white">For those 18 and above. Sorteroyal offers social gaming with no real stakes. We promote responsible play with self-restriction options and support resources.</p>
-            <p class="text-white small">Certified partners: GamCare, BeGambleAware, 18+</p>
+                      <p class="partners small">
+      Certified partners:
+      <a href="https://www.gamcare.org.uk/" target="_blank" rel="noopener noreferrer">GamCare</a>,
+      <a href="https://www.gambleaware.org/" target="_blank" rel="noopener noreferrer">BeGambleAware</a>
+      <span class="age">• 18+</span>
+    </p>
           </div>
          
           <div class="col-lg-3 col-md-6 mb-4">
