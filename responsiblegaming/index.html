@@ -32,19 +32,24 @@
   </head>
   <body>
     <div class="overlay"></div>
-    <div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
-      <div class="cookie-content">
-        <h5>Royal Cookie Consent</h5>
-        <p>
-          We use cookies to enhance your majestic experience. By continuing, you agree to our
-          <a href="/cookies-policy/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
-        </p>
-        <div class="cookie-buttons">
-          <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
-          <button class="cmn--btn" onclick="declineCookies()">Decline</button>
-        </div>
+<div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
+  <div class="cookie-content">
+    <h5>Royal Cookie Consent</h5>
+
+    <div class="cookie-row">
+      <p>
+        We use cookies to enhance your majestic experience. By continuing, you agree to our
+        <a href="/cookies/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
+      </p>
+
+      <div class="cookie-buttons">
+        <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
+        <button class="cmn--btn" onclick="declineCookies()">Decline</button>
       </div>
     </div>
+  </div>
+</div>
+
 
     <!-- Authentication Modal -->
     <div class="custom--modal" id="authModal" style="display: none">
@@ -142,7 +147,7 @@
                   </div>
                   <div id="user-account" class="ms-lg-3 mt-2 mt-lg-0 d-flex align-items-center">
                     <div id="user-circle" class="user-circle d-none">
-                      <span id="user-name"></span>
+                               <span id="user-name" ></span>
                       <div class="user-dropdown">
                         <div id="user-details"></div>
                         <a href="javascript:void(0)" id="logout-btn" onclick="logout()">Leave the Court</a>
@@ -174,14 +179,14 @@
     
     body {
       font-family: 'Poppins', sans-serif;
-      background: #0e0e1a;
+      background: #1a0e19;
       color: #f0f0f0;
       line-height: 1.7;
     }
     .page-header {
       position: relative;
       background: linear-gradient(rgba(37,37,37,0.7), rgba(0,0,0,0.7)),
-                  url('/assets/images/banner/thumb-royal.png') no-repeat center center/cover;
+                  url('/assets/images/banner/thumb-royal.jpg') no-repeat center center/cover;
       height: 300px;
       display: flex;
       align-items: center;
@@ -238,7 +243,7 @@
       text-align: center;
       margin-top: 3rem;
       padding: 2rem;
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
+         background: rgba(92, 51, 97, 0.3);
       border-radius: 10px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     }
@@ -276,22 +281,22 @@
 </header>
 <main class="content">
   <section>
-    <h5>Play for Fun 🛡️</h5>
+    <h5>Play for Fun </h5>
     <p>Sorteroyal is a social casino platform where all gameplay uses virtual coins. There are no real money transactions or payouts, ensuring a fun and risk-free experience.</p>
   </section>
 
   <section>
-    <h5>Set Time Limits ⏰</h5>
+    <h5>Set Time Limits </h5>
     <p>Enjoy gaming responsibly by setting personal time limits. Take regular breaks to maintain a healthy balance between gaming and other activities.</p>
   </section>
 
   <section>
-    <h5>Manage Your Coins 💰</h5>
+    <h5>Manage Your Coins </h5>
     <p>Keep track of your virtual coins and set a budget for in-game purchases. Our platform allows you to purchase additional coins for extended play, but always spend within your means.</p>
   </section>
 
   <section>
-    <h5>Recognize the Signs 🚨</h5>
+    <h5>Recognize the Signs </h5>
     <p>Stay aware of your gaming habits. If you feel gaming is impacting your daily life, consider taking a break or seeking support from our resources.</p>
   </section>
 
@@ -307,7 +312,7 @@
   <section class="cta">
     <h5>Need Help?</h5>
     <p>Our support team is available 24/7 to assist with any questions or concerns about responsible gaming.</p>
-    <p>📧 <a href="mailto:support@sorteroyal.com">Contact Support</a> | 📞 +1 (555) 123-4567</p>
+    <p>📧 <a href="mailto:support@sorteroyal.com">Contact Support</a> | 📞 +1 703-701-9964</p>
   </section>
 </main>
 
@@ -316,9 +321,17 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6 mb-4">
-            <h5 class="text-white mb-3">Sorteroyal</h5>
+                            <!-- Logo -->
+        <div class="logo"  style="margin-bottom: 20px;">
+          <a href="/"><img src="/assets/images/logo-royal.png" alt="Sorteroyal Logo" class="logo-img" /></a>
+        </div>
             <p class="text-white">For those 18 and above. Sorteroyal offers social gaming with no real stakes. We promote responsible play with self-restriction options and support resources.</p>
-            <p class="text-white small">Certified partners: GamCare, BeGambleAware, 18+</p>
+                      <p class="partners small">
+      Certified partners:
+      <a href="https://www.gamcare.org.uk/" target="_blank" rel="noopener noreferrer">GamCare</a>,
+      <a href="https://www.gambleaware.org/" target="_blank" rel="noopener noreferrer">BeGambleAware</a>
+      <span class="age">• 18+</span>
+    </p>
           </div>
          
           <div class="col-lg-3 col-md-6 mb-4">
