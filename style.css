@@ -21,7 +21,6 @@ section {
   /* padding: 50px 0px; */
 }
   
-
 .banner-section,
 .about-section,
 .game-section,
@@ -1816,12 +1815,14 @@ section {
 /* Cookie popup fixed at bottom */
 .cookie-popup {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: linear-gradient(180deg, var(--royal-purple), var(--dark-purple));
-  border-radius: 15px 15px 0 0; /* rounded top only */
-  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.4);
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 450px;
+  background: linear-gradient(180deg, var(--royal-blue), var(--dark-blue));
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   z-index: 10000;
   padding: 20px;
   animation-duration: 0.5s;
