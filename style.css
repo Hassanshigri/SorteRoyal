@@ -1510,11 +1510,7 @@ section {
     }
   }
   
-  @media (min-width: 992px) {
-    .navbar-collapse {
-      display: flex !important;
-    }
-  }
+
   
 /* MOBILE (up to 991.98px) */
 @media (max-width: 991.98px) {
@@ -1523,21 +1519,7 @@ section {
     padding: 10px 0;
   }
   
-  .logo {
-    flex: 1;
-  }
-     .navbar-collapse {
-      top: 60px;
-      right: 0;
-      position: fixed;
-      transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
-    z-index: 1050;
-    }
-      /* Jab open ho jaye */
-  .navbar-collapse.show {
-    transform: translateX(0);
-  }
+  
 
   /* Menu items vertically */
   .navbar-nav {
@@ -1935,38 +1917,6 @@ section {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Responsive Styles */
-@media (max-width: 991px) {
-  .navbar-collapse {
-    background: var(--dark-purple);
-    padding: 20px;
-    border-radius: 8px;
-    margin-top: 10px;
-    text-align: center;
-  }
-  .navbar-nav {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-  .nav-link {
-    font-size: 1rem;
-    padding: 10px;
-  }
-  .nav-link::after {
-    display: none;
-  }
-  .auth-section {
-    justify-content: center;
-    margin-top: 15px;
-  }
-  .why-section .section-header {
-    text-align: center;
-  }
-  .faq-wrapper {
-    grid-template-columns: 1fr;
-  }
-}
 
 @media (max-width: 768px) {
   .banner-content__title {
@@ -2051,5 +2001,144 @@ section {
   }
   .faq-section .section-header__title {
     font-size: 2.2rem;
+  }
+}
+
+/* MOBILE (up to 991.98px) */
+@media (max-width: 991.98px) {
+  .header-bottom-area {
+    flex-wrap: nowrap;
+    padding: 10px 0;
+  }
+  
+  .logo {
+    flex: 1;
+  }
+  
+  .navbar-collapse {
+    position: fixed;
+    top: 0; /* Full-screen from the top */
+    right: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background: var(--dark-purple); /* Consistent background */
+    padding: 20px;
+    border-radius: 0; /* No border-radius for full-screen */
+    margin-top: 0; /* Align with top */
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+  }
+  
+  /* When the menu is open */
+  .navbar-collapse.show {
+    transform: translateX(0);
+  }
+
+  /* Close button styles */
+  .navbar-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--gold);
+    color: var(--dark-purple);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+    z-index: 1051; /* Above navbar-collapse */
+  }
+  
+  .navbar-close-btn:hover {
+    background: #FFEB3B; /* Lighter gold on hover */
+    transform: scale(1.1);
+  }
+  
+  .close-icon {
+    font-weight: bold;
+  }
+  
+  /* Menu items vertically */
+  .navbar-nav {
+    flex-direction: column;
+    gap: 20px; /* Increased gap for spacing */
+    align-items: center;
+  }
+  
+  .nav-link {
+    font-size: 1.2rem; /* Larger font for readability */
+    padding: 15px;
+  }
+  
+  .nav-link::after {
+    display: none; /* Remove underline effect */
+  }
+  
+  .navbar-toggler {
+    margin-left: 10px;
+    padding: 0.25rem 0.5rem;
+    font-size: 1.25rem;
+    border: none;
+    background: transparent;
+  }
+  
+  /* Collapse menu styling */
+  .mobile-menu {
+    flex-direction: column;
+    padding: 15px 0;
+    background: rgba(0,0,0,0.05);
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+  
+  .mobile-menu .nav-item {
+    padding: 8px 15px;
+    text-align: center;
+  }
+
+  /* Auth section in mobile */
+  .auth-section {
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0; /* Adjusted margin */
+  }
+  
+  .auth-section #auth-btn {
+    width: 80%;
+    text-align: center;
+  }
+  
+  /* User circle in mobile */
+  .user-circle {
+    position: relative;
+    margin-top: 10px;
+  }
+  
+  .user-dropdown {
+    display: none;
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+    top: 100%;
+    background: white;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    z-index: 1;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .user-circle:hover .user-dropdown {
+    display: block;
   }
 }
