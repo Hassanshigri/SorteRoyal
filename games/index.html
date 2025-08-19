@@ -32,19 +32,24 @@
   </head>
   <body>
     <div class="overlay"></div>
-    <div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
-      <div class="cookie-content">
-        <h5>Royal Cookie Consent</h5>
-        <p>
-          We use cookies to enhance your majestic experience. By continuing, you agree to our
-          <a href="/cookies-policy/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
-        </p>
-        <div class="cookie-buttons">
-          <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
-          <button class="cmn--btn" onclick="declineCookies()">Decline</button>
-        </div>
+<div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
+  <div class="cookie-content">
+    <h5>Royal Cookie Consent</h5>
+
+    <div class="cookie-row">
+      <p>
+        We use cookies to enhance your majestic experience. By continuing, you agree to our
+        <a href="/cookies/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
+      </p>
+
+      <div class="cookie-buttons">
+        <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
+        <button class="cmn--btn" onclick="declineCookies()">Decline</button>
       </div>
     </div>
+  </div>
+</div>
+
 
     <!-- Authentication Modal -->
     <div class="custom--modal" id="authModal" style="display: none">
@@ -142,7 +147,7 @@
                   </div>
                   <div id="user-account" class="ms-lg-3 mt-2 mt-lg-0 d-flex align-items-center">
                     <div id="user-circle" class="user-circle d-none">
-                      <span id="user-name"></span>
+                               <span id="user-name" ></span>
                       <div class="user-dropdown">
                         <div id="user-details"></div>
                         <a href="javascript:void(0)" id="logout-btn" onclick="logout()">Leave the Court</a>
@@ -171,10 +176,10 @@
         display: flex; justify-content: center; align-items: center;
      }
         :root {
-            --neon-blue: #00f2ff;
+            --neon-blue: #ffffff;
             --neon-purple: #a100f2;
             --dark-void: #0a0a12;
-            --space-gray: #1a1a2e;
+            --space-gray: #24122c;
             --cyber-green: #00ff9d;
             --electric-pink: #ff00aa;
             --hacker-text: #00ff41;
@@ -203,21 +208,8 @@
             min-height: 100vh;
         }
 
-        header {
-            background: linear-gradient(to right, rgba(10, 10, 18, 0.9), rgba(26, 26, 46, 0.9));
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--neon-blue);
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+    
+      
 
         .hero {
             text-align: center;
@@ -279,7 +271,7 @@ background-repeat: no-repeat;
         }
 
         .game-card {
-            background: linear-gradient(145deg, #15152b, #1e1e38);
+            background: linear-gradient(145deg, #27152b, #351538);
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -327,67 +319,6 @@ background-repeat: no-repeat;
             margin-bottom: 1.8rem;
             font-size: 0.95rem;
             line-height: 1.7;
-        }
-
-        /* Button Styles */
-        .button-wrapper {
-            display: inline-block;
-            margin: 0.5rem 0;
-            position: relative;
-            overflow: hidden;
-            border-radius: 6px;
-        }
-
-        .button-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--electric-pink));
-            z-index: -1;
-            border-radius: 8px;
-            opacity: 0.7;
-            transition: all 0.3s ease;
-        }
-
-        .cmn--btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 32px;
-            border-radius: 6px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            background: var(--space-gray);
-            color: var(--neon-blue);
-            border: 1px solid rgba(0, 242, 255, 0.3);
-        }
-
-        .cmn--btn:hover {
-            background: rgba(26, 26, 46, 0.7);
-            color: var(--cyber-green);
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .cmn--btn:active {
-            transform: translateY(0);
-        }
-
-        .cmn--btn.btn--lg {
-            padding: 16px 40px;
-            font-size: 1.1rem;
         }
 
         /* Featured Section */
@@ -649,20 +580,22 @@ background-repeat: no-repeat;
                 </div>
             </div>
 
-            <!-- The Crypt - Nolimit City -->
-            <div class="game-card cyber-border" data-provider="nolimit">
-                <img src="/assets/images/thecrypt.jpeg" alt="The Crypt">
-                <div class="game-card-content">
-                    <h3>The Crypt</h3>
-                    <p class="provider-tag">Nolimit City</p>
-                    <p>Descend into dark depths to uncover ancient secrets.</p>
-                    <div class="button-wrapper">
-                            <a href="javascript:void(0)" class="cmn--btn active btn--md radius-0" onclick="playGame('https://launcher-eu1.gsplauncher.de/games/encrypted/launcher?payload=QTEyOEdDTQ.CxA36C4Q9GwNctdUOVYV-GxSLmlZb0HeT0zmu3keSYED1SLtmMJs-UurwD8')">
-                            Play Now
-                            </a>
-                    </div>
-                </div>
-            </div>
+         <!-- The Dog House - Pragmatic Play -->
+<div class="game-card cyber-border" data-provider="pragmatic">
+  <img src="/assets/images/the-dog-house.jpeg" alt="The Dog House">
+  <div class="game-card-content">
+    <h3>The Dog House</h3>
+    <p class="provider-tag">Pragmatic Play</p>
+    <p>Join the furry friends for fun spins and big wins!</p>
+    <div class="button-wrapper">
+        <a href="javascript:void(0)" class="cmn--btn active btn--md radius-0" onclick="playGame('https://demogamesfree.aplkutuybu.net/gs2c/openGame.do?gameSymbol=vs20doghouse&lang=en&cur=USD&lobbyUrl=https://gamdom.com/casino&stylename=gmdm_gamdom&jurisdiction=99&isGameUrlApiCalled=true')">
+      
+        Play Now
+      </a>
+    </div>
+  </div>
+</div>
+
 
             <!-- Bullets and Bounty - Hacksaw Gaming -->
             <div class="game-card cyber-border" data-provider="hacksaw">
@@ -739,21 +672,6 @@ background-repeat: no-repeat;
                 </div>
             </div>
 
-            <!-- Duck Hunters - Hacksaw Gaming -->
-            <div class="game-card cyber-border" data-provider="hacksaw">
-                <img src="/assets/images/duck-hunters-game.webp" alt="Duck Hunters">
-                <div class="game-card-content">
-                    <h3>Duck Hunters</h3>
-                    <p class="provider-tag">Hacksaw Gaming</p>
-                    <p>Take aim and test your shooting skills in this hunt.</p>
-                    <div class="button-wrapper">
-                            <a href="javascript:void(0)" class="cmn--btn active btn--md radius-0" onclick="playGame('https://launcher-eu1.gsplauncher.de/games/encrypted/launcher?payload=QTEyOEdDTQ.ESY9DozniZNDsgtXWHQLLm8owqa9zDlHEVVMk61zZSlhgFTjaIxbZtz2lI0')">
-                            Play Now
-                            </a>
-                    </div>
-                </div>
-            </div>
-
             <!-- Slayers Inc Boosted - Nolimit City -->
             <div class="game-card cyber-border" data-provider="nolimit">
                 <img src="/assets/images/slayers.jpeg" alt="Slayers Inc Boosted">
@@ -778,9 +696,17 @@ background-repeat: no-repeat;
       <div class="container">
         <div class="row">
           <div class="col-lg-6 mb-4">
-            <h5 class="text-white mb-3">Sorteroyal</h5>
+                            <!-- Logo -->
+        <div class="logo" style="margin-bottom: 20px;">
+          <a href="/"><img src="/assets/images/logo-royal.png" alt="Sorteroyal Logo" class="logo-img" /></a>
+        </div>
             <p class="text-white">For those 18 and above. Sorteroyal offers social gaming with no real stakes. We promote responsible play with self-restriction options and support resources.</p>
-            <p class="text-white small">Certified partners: GamCare, BeGambleAware, 18+</p>
+                      <p class="partners small">
+      Certified partners:
+      <a href="https://www.gamcare.org.uk/" target="_blank" rel="noopener noreferrer">GamCare</a>,
+      <a href="https://www.gambleaware.org/" target="_blank" rel="noopener noreferrer">BeGambleAware</a>
+      <span class="age">• 18+</span>
+    </p>
           </div>
          
           <div class="col-lg-3 col-md-6 mb-4">
