@@ -1811,20 +1811,34 @@ section {
 }
 
 /* Cookie popup fixed at bottom */
+/* Cookie popup fixed at bottom */
 .cookie-popup {
   position: fixed;
   bottom: 30px;
   left: 50%;
-  transform: translateX(-50%);
   width: 90%;
   max-width: 450px;
-  background: linear-gradient(180deg, var(--royal-blue), var(--dark-blue));
+  background: linear-gradient(180deg, var(--royal-purple), var(--dark-purple));
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   z-index: 10000;
   padding: 20px;
   animation-duration: 0.5s;
+
+  /* Text Styling */
+  color: var(--light-blue);
+  font-family: "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
 }
+
+
+
+.cookie-popup button:hover {
+  background: var(--accent-purple);
+  color: var(--white);
+}
+
 
 /* Content */
 .cookie-content {
