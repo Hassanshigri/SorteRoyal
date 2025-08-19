@@ -48,8 +48,8 @@
       /* Cookie Policy Styles to match Terms and Privacy */
       .cookie-header {
         position: relative;
-        background: linear-gradient(rgba(15,12,41,0.85), rgba(26,26,78,0.85)),
-                    url('/assets/images/banner/thumb-royal.png') no-repeat center center/cover;
+        background: linear-gradient(rgba(37, 21, 36, 0.85), rgba(51, 24, 46, 0.85)),
+                    url('/assets/images/banner/r.jpg') no-repeat center center/cover;
         color: #fff;
         text-align: center;
         padding: 5rem 1rem;
@@ -58,7 +58,7 @@
       .cookie-header p { color: #ddd; max-width: 900px; margin: 0 auto; }
 
       .cookie-container { max-width: 1000px; margin: 3rem auto; padding: 0 1rem; }
-      .cookie-card { background: rgba(26,26,78,0.7); border: 1px solid rgba(248,213,107,0.12); padding: 2rem; border-radius: 12px; color: #e9e9ef; box-shadow: 0 8px 30px rgba(0,0,0,0.35); }
+      .cookie-card { background: rgba(44, 21, 42, 0.7); border: 1px solid rgba(248,213,107,0.12); padding: 2rem; border-radius: 12px; color: #e9e9ef; box-shadow: 0 8px 30px rgba(0,0,0,0.35); }
       .cookie-card h5 { color: #ffe425; margin: 1rem 0; }
       .cookie-card h3 { color: #f8d56b; margin-top: 1.25rem; }
       .cookie-card p, .cookie-card li { color: #d6d6df; line-height: 1.6; }
@@ -75,19 +75,24 @@
   </head>
   <body>
     <div class="overlay"></div>
-    <div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
-      <div class="cookie-content">
-        <h5>Royal Cookie Consent</h5>
-        <p>
-          We use cookies to enhance your majestic experience. By continuing, you agree to our
-          <a href="/cookies-policy/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
-        </p>
-        <div class="cookie-buttons">
-          <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
-          <button class="cmn--btn" onclick="declineCookies()">Decline</button>
-        </div>
+<div class="cookie-popup animate__animated animate__fadeInUp" id="cookiePopup" style="display: none">
+  <div class="cookie-content">
+    <h5>Royal Cookie Consent</h5>
+
+    <div class="cookie-row">
+      <p>
+        We use cookies to enhance your majestic experience. By continuing, you agree to our
+        <a href="/cookies/" style="color: var(--gold); text-decoration: underline">Cookies Policy</a>.
+      </p>
+
+      <div class="cookie-buttons">
+        <button class="cmn--btn active" onclick="acceptCookies()">Accept</button>
+        <button class="cmn--btn" onclick="declineCookies()">Decline</button>
       </div>
     </div>
+  </div>
+</div>
+
 
     <!-- Authentication Modal -->
     <div class="custom--modal" id="authModal" style="display: none">
@@ -180,7 +185,7 @@
                       </div>
                       <div id="user-account" class="ms-lg-3 mt-2 mt-lg-0 d-flex align-items-center">
                         <div id="user-circle" class="user-circle d-none">
-                          <span id="user-name"></span>
+                                   <span id="user-name" ></span>
                           <div class="user-dropdown">
                             <div id="user-details"></div>
                             <a href="javascript:void(0)" id="logout-btn" onclick="logout()">Leave the Court</a>
@@ -260,7 +265,7 @@
 
         <section id="contact">
           <h5>7. Contact Us</h5>
-          <p>If you have questions about this Cookie Policy, please contact our support team at <a href="mailto:support@sorteroyal.com" style="color:#f8d56b; text-decoration:underline;">support@sorteroyal.com</a> or call +92 300 1234567.</p>
+          <p>If you have questions about this Cookie Policy, please contact our support team at <a href="mailto:support@sorteroyal.com" style="color:#f8d56b; text-decoration:underline;">support@sorteroyal.com</a> or call +1 703-701-9964.</p>
         </section>
 
         <p class="cookie-note">Last updated: <strong>August 15, 2025</strong></p>
@@ -271,9 +276,17 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6 mb-4">
-            <h5 class="text-white mb-3">Sorteroyal</h5>
+                            <!-- Logo -->
+        <div class="logo" style="margin-bottom: 20px;">
+          <a href="/"><img src="/assets/images/logo-royal.png" alt="Sorteroyal Logo" class="logo-img" /></a>
+        </div>
             <p class="text-white">For those 18 and above. Sorteroyal offers social gaming with no real stakes. We promote responsible play with self-restriction options and support resources.</p>
-            <p class="text-white small">Certified partners: GamCare, BeGambleAware, 18+</p>
+                      <p class="partners small">
+      Certified partners:
+      <a href="https://www.gamcare.org.uk/" target="_blank" rel="noopener noreferrer">GamCare</a>,
+      <a href="https://www.gambleaware.org/" target="_blank" rel="noopener noreferrer">BeGambleAware</a>
+      <span class="age">• 18+</span>
+    </p>
           </div>
           <div class="col-lg-3 col-md-6 mb-4">
             <h5 class="text-white mb-3">Legal</h5>
@@ -287,7 +300,7 @@
           <div class="col-lg-3 mb-4">
             <h5 class="text-white mb-3">Contact Info</h5>
             <p class="text-white mb-2">
-              <i class="fas fa-phone me-2"></i>+92 300 1234567
+              <i class="fas fa-phone me-2"></i>+1 703-701-9964
             </p>
             <p class="text-white mb-2">
               <i class="fas fa-envelope me-2"></i>support@sorteroyal.com
